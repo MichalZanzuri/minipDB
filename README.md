@@ -37,8 +37,8 @@ The DSD diagram shows the data structure and how data is stored in the database,
 The system includes the following SQL files:
 
 **createTables.sql:** This file contains all SQL commands to create the tables in the database.
-Stage1/Scripts/CreateTable
-View createTables.sql
+**[View createTables.sql](Stage1/Scripts/CreateTable)**
+
 
 **insertTables.sql:** This file contains all SQL commands to insert data into the tables.
 
