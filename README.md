@@ -54,8 +54,7 @@ The system includes the following SQL files:
 Data insertion was performed using three different tools:
 
 **1. Mockaroo:** We used Mockaroo to generate a CSV file for the Supplier and Employee tables. The file contains data inserted within specific ranges for each table.
-
-View Mockaroo Data CSV
+[View Mockaroo Data CSV](Stage1/MockData)
 
 **2. Generatedata:** We used Generatedata to create CSV files for the Supplier table. The files were generated with predefined ranges for each table.
 
