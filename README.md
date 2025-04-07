@@ -1,21 +1,20 @@
 # Store Managment
 Michal Zanzuri and Yael Bouskila-Ditchi
 # Table of Contents
+[Introduction](#introduction)
+
+
 ### Introduction
 The system is designed for inventory management of a store, including managing supplier details, orders, and products. It allows tracking of product inventory, suppliers, orders, and invoices. The system is meant to provide store managers with an organized and convenient way to manage the inventory and coordinate with suppliers.
 
 #### System Purpose
 The system aims to ensure effective management of the store's inventory, suppliers, and orders, while maintaining an organized flow of information. Using the system, actions such as the following can be performed:
-
 Managing supplier details and establishing contact with suppliers.
-
 Managing orders with suppliers, including dates, quantities, and prices.
-
 Tracking inventory and product status in the store.
-
 Handling returns and processing canceled orders.
 
-ERD and DSD Diagrams
+### ERD and DSD Diagrams
 ERD (Entity-Relationship Diagram):
 The ERD diagram represents the entities within the system and the relationships between them. Each entity is represented by a table in the database.
 
@@ -26,7 +25,7 @@ The DSD diagram shows the data structure and how data is stored in the database,
 
 View DSD Diagram
 
-SQL Scripts
+### SQL Scripts
 The system includes the following SQL files:
 
 createTables.sql:
