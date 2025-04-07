@@ -71,3 +71,5 @@ Data insertion was performed using three different tools:
 
 ## Backup and Restoration
 The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply run the backup file in your database management system.
+
+**[Backups](Stage1/Backups)**
