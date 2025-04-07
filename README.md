@@ -41,8 +41,8 @@ The system includes the following SQL files:
 
 
 **insertTables.sql:** This file contains all SQL commands to insert data into the tables.
+**[View insertTables.sql](Stage1/Scripts/InsertTable)**
 
-View insertTables.sql
 
 **dropTables.sql:** This file contains the SQL commands to drop all the tables.
 
