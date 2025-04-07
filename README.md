@@ -37,31 +37,37 @@ The DSD diagram shows the data structure and how data is stored in the database,
 The system includes the following SQL files:
 
 **createTables.sql:** This file contains all SQL commands to create the tables in the database.
+
 **[View createTables.sql](Stage1/Scripts/CreateTable)**
 
 
 **insertTables.sql:** This file contains all SQL commands to insert data into the tables.
+
 **[View insertTables.sql](Stage1/Scripts/InsertTable)**
 
 
 **dropTables.sql:** This file contains the SQL commands to drop all the tables.
+
 **[View dropTables.sql](Stage1/Scripts/DropTable)**
 
 **selectAll_tables.sql:** This file contains SQL commands to select all data from all tables.
+
 **[View selectAll_tables.sql](Stage1/Scripts/SelectAll)**
 
 ## Data Insertion
 Data insertion was performed using three different tools:
 
 **1. Mockaroo:** We used Mockaroo to generate a CSV file for the Supplier and Employee tables. The file contains data inserted within specific ranges for each table.
+
 [View Mockaroo Data CSV](Stage1/MockData)
 
 **2. Generatedata:** We used Generatedata to create CSV files for the Supplier table. The files were generated with predefined ranges for each table.
+
 [View Generatedata CSV Files](Stage1/Generatedata)
 
 **3. Python Script:** A Python script was used to create CSV files for the following tables: Supplier, Employee, Product, Order_d, Quotation, ReturnProduct, and ProductOrder. The script automatically generated data for each table based on the defined attributes, allowing for quick and structured data insertion.
 
-View Python Script
+[View Python Script](Stage1/PythonScripts/InsertData)
 
 ## Backup and Restoration
 The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply run the backup file in your database management system.
