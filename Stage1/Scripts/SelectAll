@@ -1,0 +1,7 @@
+SELECT * FROM Supplier;
+SELECT * FROM Employee;
+SELECT * FROM Product;
+SELECT * FROM Order_d;
+SELECT * FROM Quotation;
+SELECT * FROM ReturnProduct;
+SELECT * FROM ProductOrder;
