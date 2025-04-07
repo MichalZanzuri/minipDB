@@ -5,3 +5,13 @@ SELECT * FROM Order_d;
 SELECT * FROM Quotation;
 SELECT * FROM ReturnProduct;
 SELECT * FROM ProductOrder;
+
+
+
+SELECT Count(*) FROM Supplier;
+SELECT Count(*) FROM Employee;
+SELECT Count(*) FROM Product;
+SELECT Count(*) FROM Order_d;
+SELECT Count(*) FROM Quotation;
+SELECT Count(*) FROM ReturnProduct;
+SELECT Count(*) FROM ProductOrder;
