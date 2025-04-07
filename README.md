@@ -78,3 +78,5 @@ Data insertion was performed using three different tools:
 The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply run the backup file in your database management system.
 
 **[Backups](Stage1/Backups)**
+![image](https://github.com/user-attachments/assets/d93b987c-ebce-4368-9aa8-cad8e7a4fe8f)
+
