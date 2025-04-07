@@ -1,8 +1,16 @@
 # Store Managment
 Michal Zanzuri and Yael Bouskila-Ditchi
-# Table of Contents
+## Table of Contents
+*[Stage 1: Design and Build the Database](#stage-1:-design-and-build-the-database)
 [Introduction](#introduction)
+[System Purpose](#System-Purpose)
+[ERD and DSD Diagrams](#ERD-and-DSD-Diagrams)
+[SQL Scripts](#SQL-Scripts)
+[Data Insertion](#Data-Insertion)
+[Backup and Restoration](#Backup-and-Restoration)
 
+
+# Stage 1: Design and Build the Database
 
 ### Introduction
 The system is designed for inventory management of a store, including managing supplier details, orders, and products. It allows tracking of product inventory, suppliers, orders, and invoices. The system is meant to provide store managers with an organized and convenient way to manage the inventory and coordinate with suppliers.
