@@ -45,8 +45,7 @@ The system includes the following SQL files:
 
 
 **dropTables.sql:** This file contains the SQL commands to drop all the tables.
-
-View dropTables.sql
+**[View dropTables.sql](Stage1/Scripts/DropTable)**
 
 **selectAll_tables.sql:** This file contains SQL commands to select all data from all tables.
 
