@@ -1,10 +1,10 @@
 # Store Managment
 Michal Zanzuri and Yael Bouskila-Ditchi
 # Table of Contents
-## Introduction
+### Introduction
 The system is designed for inventory management of a store, including managing supplier details, orders, and products. It allows tracking of product inventory, suppliers, orders, and invoices. The system is meant to provide store managers with an organized and convenient way to manage the inventory and coordinate with suppliers.
 
-## System Purpose
+### System Purpose
 The system aims to ensure effective management of the store's inventory, suppliers, and orders, while maintaining an organized flow of information. Using the system, actions such as the following can be performed:
 
 Managing supplier details and establishing contact with suppliers.
