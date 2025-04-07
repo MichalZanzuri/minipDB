@@ -27,18 +27,17 @@ Handling returns and processing canceled orders.
 The ERD diagram represents the entities within the system and the relationships between them. Each entity is represented by a table in the database.
 ![ERD](https://github.com/user-attachments/assets/fa613e91-3ceb-4cbe-a41a-73fc2d0a15cb)
 
-View ERD Diagram
 
 #### DSD (Data Structure Diagram):
 The DSD diagram shows the data structure and how data is stored in the database, including tables, primary and foreign keys, and relationships between fields.
+![DSD](https://github.com/user-attachments/assets/3f6f33f6-a07a-4697-bc61-0f9622c94742)
 
-View DSD Diagram
 
 ## SQL Scripts
 The system includes the following SQL files:
 
 **createTables.sql:** This file contains all SQL commands to create the tables in the database.
-
+Stage1/Scripts/CreateTable
 View createTables.sql
 
 **insertTables.sql:** This file contains all SQL commands to insert data into the tables.
