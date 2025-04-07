@@ -48,8 +48,7 @@ The system includes the following SQL files:
 **[View dropTables.sql](Stage1/Scripts/DropTable)**
 
 **selectAll_tables.sql:** This file contains SQL commands to select all data from all tables.
-
-View selectAll_tables.sql
+**[View selectAll_tables.sql](Stage1/Scripts/SelectAll)**
 
 ## Data Insertion
 Data insertion was performed using three different tools:
