@@ -57,8 +57,7 @@ Data insertion was performed using three different tools:
 [View Mockaroo Data CSV](Stage1/MockData)
 
 **2. Generatedata:** We used Generatedata to create CSV files for the Supplier table. The files were generated with predefined ranges for each table.
-
-View Generatedata CSV Files
+[View Generatedata CSV Files](Stage1/Generatedata)
 
 **3. Python Script:** A Python script was used to create CSV files for the following tables: Supplier, Employee, Product, Order_d, Quotation, ReturnProduct, and ProductOrder. The script automatically generated data for each table based on the defined attributes, allowing for quick and structured data insertion.
 
