@@ -1,0 +1,123 @@
+import psycopg2
+from faker import Faker
+import random
+from datetime import timedelta
+
+fake = Faker()
+conn = psycopg2.connect(
+    dbname="mydatabase",
+    user="myuser",
+    password="mypassword",
+    host="localhost",
+    port="5432"
+)
+cursor = conn.cursor()
+
+# create 50 Suppliers
+supplier_ids = []
+for _ in range(50):
+    cursor.execute("""
+        INSERT INTO Supplier (phone, company_name, first_contact_date)
+        VALUES (%s, %s, %s)
+        RETURNING supplier_id
+    """, (fake.phone_number(), fake.company(), fake.date_this_decade()))
+    supplier_ids.append(cursor.fetchone()[0])
+
+# create 10 Employees
+employee_ids = []
+for _ in range(10):
+    cursor.execute("""
+        INSERT INTO Employee (hire_date, job_title, full_name)
+        VALUES (%s, %s, %s)
+        RETURNING employee_id
+    """, (fake.date_this_decade(), fake.job(), fake.name()))
+    employee_ids.append(cursor.fetchone()[0])
+
+# create 50 Products
+product_ids = []
+for _ in range(50):
+    cursor.execute("""
+        INSERT INTO Product (minAmount, price, category, amount, added_date, product_name, gender, color, productSize)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        RETURNING product_id
+    """, (
+        random.randint(1, 10),
+        round(random.uniform(10, 200), 2),
+        fake.word(),
+        random.randint(5, 100),
+        fake.date_this_year(),
+        fake.word().capitalize(),
+        random.choice(['Male', 'Female', 'Unisex']),
+        fake.color_name(),
+        random.choice(['S', 'M', 'L', 'XL'])
+    ))
+    product_ids.append(cursor.fetchone()[0])
+
+# create 50 Orders
+order_ids = []
+for _ in range(50):
+    order_date = fake.date_this_year()
+    delivery_date = fake.date_between(start_date=order_date)
+    arrival_date = fake.date_between(start_date=delivery_date)
+    status = random.choice(['Pending', 'Shipped', 'Delivered'])
+    cursor.execute("""
+        INSERT INTO Order_d (arrival_date, delivery_date, quantity, order_date, status, cost, price, supplier_id, employee_id)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        RETURNING order_id
+    """, (
+        arrival_date,
+        delivery_date,
+        random.randint(1, 100),
+        order_date,
+        status,
+        round(random.uniform(100, 1000), 2),
+        round(random.uniform(150, 1200), 2),
+        random.choice(supplier_ids),
+        random.choice(employee_ids)
+    ))
+    order_ids.append(cursor.fetchone()[0])
+
+# create 50 Quotation
+for _ in range(50):
+    offer_date = fake.date_this_year()
+    expiration_date = offer_date + timedelta(days=random.randint(1, 30))
+    cursor.execute("""
+        INSERT INTO Quotation (q_price, offer_date, expiration_date, order_id, supplier_id)
+        VALUES (%s, %s, %s, %s, %s)
+    """, (
+        round(random.uniform(200, 1000), 2),
+        offer_date,
+        expiration_date,
+        random.choice(order_ids),
+        random.choice(supplier_ids)
+    ))
+
+# create 50 ReturnProduct
+for _ in range(50):
+    cursor.execute("""
+        INSERT INTO ReturnProduct (return_date, return_status, return_reason, supplier_id)
+        VALUES (%s, %s, %s, %s)
+    """, (
+        fake.date_this_year(),
+        random.choice(['Approved', 'Pending', 'Rejected']),
+        fake.sentence(),
+        random.choice(supplier_ids)
+    ))
+
+# create relationship between Products to Orders in ProductOrder table with conflict handling
+for _ in range(50):
+    cursor.execute("""
+        INSERT INTO ProductOrder (product_id, order_id)
+        VALUES (%s, %s)
+        ON CONFLICT DO NOTHING
+    """, (
+        random.choice(product_ids),
+        random.choice(order_ids)
+    ))
+
+# save all changes
+conn.commit()
+cursor.close()
+conn.close()
+
+print("✅ The data was added successfully!")
