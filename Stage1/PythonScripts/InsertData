@@ -15,7 +15,7 @@ cursor = conn.cursor()
 
 # create 50 Suppliers
 supplier_ids = []
-for _ in range(50):
+for _ in range(400):
     cursor.execute("""
         INSERT INTO Supplier (phone, company_name, first_contact_date)
         VALUES (%s, %s, %s)
@@ -25,7 +25,7 @@ for _ in range(50):
 
 # create 10 Employees
 employee_ids = []
-for _ in range(10):
+for _ in range(400):
     cursor.execute("""
         INSERT INTO Employee (hire_date, job_title, full_name)
         VALUES (%s, %s, %s)
@@ -35,7 +35,7 @@ for _ in range(10):
 
 # create 50 Products
 product_ids = []
-for _ in range(50):
+for _ in range(600):
     cursor.execute("""
         INSERT INTO Product (minAmount, price, category, amount, added_date, product_name, gender, color, productSize)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -55,7 +55,7 @@ for _ in range(50):
 
 # create 50 Orders
 order_ids = []
-for _ in range(50):
+for _ in range(400):
     order_date = fake.date_this_year()
     delivery_date = fake.date_between(start_date=order_date)
     arrival_date = fake.date_between(start_date=delivery_date)
@@ -78,7 +78,7 @@ for _ in range(50):
     order_ids.append(cursor.fetchone()[0])
 
 # create 50 Quotation
-for _ in range(50):
+for _ in range(400):
     offer_date = fake.date_this_year()
     expiration_date = offer_date + timedelta(days=random.randint(1, 30))
     cursor.execute("""
@@ -93,7 +93,7 @@ for _ in range(50):
     ))
 
 # create 50 ReturnProduct
-for _ in range(50):
+for _ in range(400):
     cursor.execute("""
         INSERT INTO ReturnProduct (return_date, return_status, return_reason, supplier_id)
         VALUES (%s, %s, %s, %s)
@@ -105,7 +105,7 @@ for _ in range(50):
     ))
 
 # create relationship between Products to Orders in ProductOrder table with conflict handling
-for _ in range(50):
+for _ in range(400):
     cursor.execute("""
         INSERT INTO ProductOrder (product_id, order_id)
         VALUES (%s, %s)
