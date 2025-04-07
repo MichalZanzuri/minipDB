@@ -25,6 +25,7 @@ Handling returns and processing canceled orders.
 ## ERD and DSD Diagrams
 #### ERD (Entity-Relationship Diagram):
 The ERD diagram represents the entities within the system and the relationships between them. Each entity is represented by a table in the database.
+![ERD](https://github.com/user-attachments/assets/fa613e91-3ceb-4cbe-a41a-73fc2d0a15cb)
 
 View ERD Diagram
 
