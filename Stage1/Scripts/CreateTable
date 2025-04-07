@@ -1,1 +1,86 @@
+-- Drop all existing tables in public schema
+DO $$ 
+DECLARE 
+    r RECORD;
+BEGIN
+    FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = 'public') LOOP
+        EXECUTE 'DROP TABLE IF EXISTS public.' || r.tablename || ' CASCADE';
+    END LOOP;
+END $$;
 
+-- Create Supplier table
+CREATE TABLE Supplier (
+    supplier_id SERIAL PRIMARY KEY,
+    phone VARCHAR(50) NOT NULL,  -- ⬅️ הגדלנו מ־VARCHAR(20) ל־VARCHAR(50)
+    company_name VARCHAR(255) NOT NULL,
+    first_contact_date DATE
+);
+
+-- Create Employee table
+CREATE TABLE Employee (
+    employee_id SERIAL PRIMARY KEY,
+    hire_date DATE NOT NULL,
+    job_title VARCHAR(100) NOT NULL,
+    full_name VARCHAR(255) NOT NULL
+);
+
+-- Create Product table
+CREATE TABLE Product (
+    product_id SERIAL PRIMARY KEY,
+    minAmount INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    amount INT NOT NULL,
+    added_date DATE NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    gender VARCHAR(50),
+    color VARCHAR(50),
+    productSize VARCHAR(50)
+);
+
+-- Create Order_d table
+CREATE TABLE Order_d (
+    order_id SERIAL PRIMARY KEY,
+    arrival_date DATE,
+    delivery_date DATE,
+    quantity INT NOT NULL,
+    order_date DATE NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    cost DECIMAL(10,2) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    supplier_id INT NOT NULL,
+    employee_id INT NOT NULL,
+    FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id),
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id)
+);
+
+-- Create Quotation table
+CREATE TABLE Quotation (
+    number SERIAL PRIMARY KEY,
+    q_price DECIMAL(10,2) NOT NULL,
+    offer_date DATE NOT NULL,
+    expiration_date DATE NOT NULL,
+    order_id INT NOT NULL,
+    supplier_id INT NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES Order_d(order_id),
+    FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id)
+);
+
+-- Create ReturnProduct table
+CREATE TABLE ReturnProduct (
+    return_id SERIAL PRIMARY KEY,
+    return_date DATE NOT NULL,
+    return_status VARCHAR(50) NOT NULL,
+    return_reason TEXT,
+    supplier_id INT,
+    FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id)
+);
+
+-- Create ProductOrder table
+CREATE TABLE ProductOrder (
+    product_id INT NOT NULL,
+    order_id INT NOT NULL,
+    PRIMARY KEY (product_id, order_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id),
+    FOREIGN KEY (order_id) REFERENCES Order_d(order_id)
+);
