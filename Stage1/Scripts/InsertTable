@@ -1,0 +1,74 @@
+INSERT INTO Supplier (phone, company_name, first_contact_date) 
+VALUES ('659-291-3301', 'Wikizz', '2023-01-01');
+
+INSERT INTO Supplier (phone, company_name, first_contact_date) 
+VALUES ('842-241-3177', 'Demizz', '2023-02-01');
+
+INSERT INTO Supplier (phone, company_name, first_contact_date) 
+VALUES ('894-353-1632', 'Omba', '2023-03-01');
+
+
+
+INSERT INTO Employee (hire_date, job_title, full_name) 
+VALUES ('2023-01-01', 'Manager', 'John Doe');
+
+INSERT INTO Employee (hire_date, job_title, full_name) 
+VALUES ('2023-02-01', 'Sales', 'Jane Smith');
+
+INSERT INTO Employee (hire_date, job_title, full_name) 
+VALUES ('2023-03-01', 'Support', 'Alice Johnson');
+
+
+
+INSERT INTO Product (minAmount, price, category, amount, added_date, product_name, gender, color, productSize) 
+VALUES (10, 15.50, 'Electronics', 100, '2023-01-01', 'Smartphone', 'Unisex', 'Black', 'Medium');
+
+INSERT INTO Product (minAmount, price, category, amount, added_date, product_name, gender, color, productSize) 
+VALUES (5, 25.00, 'Clothing', 50, '2023-02-01', 'T-Shirt', 'Male', 'Blue', 'Large');
+
+INSERT INTO Product (minAmount, price, category, amount, added_date, product_name, gender, color, productSize) 
+VALUES (20, 10.00, 'Accessories', 200, '2023-03-01', 'Headphones', 'Female', 'Pink', 'Small');
+
+
+
+INSERT INTO Order_d (arrival_date, delivery_date, quantity, order_date, status, cost, price, supplier_id, employee_id) 
+VALUES ('2023-01-10', '2023-01-15', 50, '2023-01-05', 'Shipped', 1000.00, 1200.00, 1, 1);
+
+INSERT INTO Order_d (arrival_date, delivery_date, quantity, order_date, status, cost, price, supplier_id, employee_id) 
+VALUES ('2023-02-10', '2023-02-15', 30, '2023-02-05', 'Pending', 600.00, 750.00, 2, 2);
+
+INSERT INTO Order_d (arrival_date, delivery_date, quantity, order_date, status, cost, price, supplier_id, employee_id) 
+VALUES ('2023-03-10', '2023-03-15', 100, '2023-03-05', 'Delivered', 2000.00, 2400.00, 3, 3);
+
+
+
+INSERT INTO Quotation (q_price, offer_date, expiration_date, order_id, supplier_id) 
+VALUES (1500.00, '2023-01-01', '2023-01-10', 1, 1);
+
+INSERT INTO Quotation (q_price, offer_date, expiration_date, order_id, supplier_id) 
+VALUES (800.00, '2023-02-01', '2023-02-10', 2, 2);
+
+INSERT INTO Quotation (q_price, offer_date, expiration_date, order_id, supplier_id) 
+VALUES (2500.00, '2023-03-01', '2023-03-10', 3, 3);
+
+
+
+INSERT INTO ReturnProduct (return_date, return_status, return_reason, supplier_id) 
+VALUES ('2023-01-20', 'Returned', 'Damaged product', 1);
+
+INSERT INTO ReturnProduct (return_date, return_status, return_reason, supplier_id) 
+VALUES ('2023-02-20', 'Returned', 'Incorrect size', 2);
+
+INSERT INTO ReturnProduct (return_date, return_status, return_reason, supplier_id) 
+VALUES ('2023-03-20', 'Pending', 'Changed mind', 3);
+
+
+
+INSERT INTO ProductOrder (product_id, order_id) 
+VALUES (1, 1);
+
+INSERT INTO ProductOrder (product_id, order_id) 
+VALUES (2, 2);
+
+INSERT INTO ProductOrder (product_id, order_id) 
+VALUES (3, 3);
