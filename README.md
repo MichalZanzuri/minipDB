@@ -12,7 +12,7 @@ Michal Zanzuri and Yael Bouskila-Ditchi
 
 # Stage 1: Design and Build the Database
 
-### Introduction
+## Introduction
 The system is designed for inventory management of a store, including managing supplier details, orders, and products. It allows tracking of product inventory, suppliers, orders, and invoices. The system is meant to provide store managers with an organized and convenient way to manage the inventory and coordinate with suppliers.
 
 #### System Purpose
@@ -22,7 +22,7 @@ Managing orders with suppliers, including dates, quantities, and prices.
 Tracking inventory and product status in the store.
 Handling returns and processing canceled orders.
 
-### ERD and DSD Diagrams
+## ERD and DSD Diagrams
 #### ERD (Entity-Relationship Diagram):
 The ERD diagram represents the entities within the system and the relationships between them. Each entity is represented by a table in the database.
 
@@ -33,7 +33,7 @@ The DSD diagram shows the data structure and how data is stored in the database,
 
 View DSD Diagram
 
-### SQL Scripts
+## SQL Scripts
 The system includes the following SQL files:
 
 **createTables.sql:** This file contains all SQL commands to create the tables in the database.
@@ -52,7 +52,7 @@ View dropTables.sql
 
 View selectAll_tables.sql
 
-### Data Insertion
+## Data Insertion
 Data insertion was performed using three different tools:
 
 **1. Mockaroo:** We used Mockaroo to generate a CSV file for the Supplier and Employee tables. The file contains data inserted within specific ranges for each table.
@@ -67,5 +67,5 @@ View Generatedata CSV Files
 
 View Python Script
 
-### Backup and Restoration
+## Backup and Restoration
 The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply run the backup file in your database management system.
