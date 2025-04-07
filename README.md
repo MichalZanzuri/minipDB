@@ -1,7 +1,7 @@
 # Store Managment
 Michal Zanzuri and Yael Bouskila-Ditchi
 ## Table of Contents
-* [Stage 1: Design and Build the Database](#stage-1:-design-and-build-the-database)
+-[Stage 1: Design and Build the Database](#stage-1:-design-and-build-the-database)
 - [Introduction](#introduction)
 - [System Purpose](#System-Purpose)
 - [ERD and DSD Diagrams](#ERD-and-DSD-Diagrams)
