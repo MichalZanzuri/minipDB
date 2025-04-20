@@ -80,3 +80,16 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 **[Backups](Stage1/Backups)**
 ![image](https://github.com/user-attachments/assets/d93b987c-ebce-4368-9aa8-cad8e7a4fe8f)
 
+
+# Stage 2: Queries
+
+#### Select
+-[Stage 1: Design and Build the Database](#stage-1:-design-and-build-the-database)
+> שאילתה זו מציגה את מספר ההזמנות שבוצעו לכל ספק, בכל שנה, כשהנתונים מחולקים לפי סטטוס ההזמנה (למשל: הוזמנה, סופקה, בוטלה וכו').
+> מטרת השאילתה היא לספק מבט כולל על רמת הפעילות של כל ספק לאורך השנים.
+- [Introduction](#introduction)
+- [System Purpose](#System-Purpose)
+- [ERD and DSD Diagrams](#ERD-and-DSD-Diagrams)
+- [SQL Scripts](#SQL-Scripts)
+- [Data Insertion](#Data-Insertion)
+- [Backup and Restoration](#Backup-and-Restoration)
