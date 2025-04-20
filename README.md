@@ -218,21 +218,21 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 
 ### [Constraints](Stage2/Constraints.sql)
 
-> ####  אילוץ CHECK על טבלת Product – המחיר חייב להיות חיובי  
+> ####  -אילוץ CHECK על טבלת Product – המחיר חייב להיות חיובי  
 >באמצעות הפקודה `ALTER TABLE` הוסף אילוץ מסוג `CHECK` לעמודה `price`, אשר מוודא שכל ערך שמוזן בעמודה זו יהיה **גדול מ־0**.  
 >המטרה של האילוץ היא למנוע הזנת מחירים שליליים למוצרים.
 > ![image](https://github.com/user-attachments/assets/104d2657-3cef-4894-b4d3-c125f763a058)
 
 
 
-> ####  אילוץ DEFAULT על טבלת Order_d – ערך ברירת מחדל לסטטוס ההזמנה  
+> ####  -אילוץ DEFAULT על טבלת Order_d – ערך ברירת מחדל לסטטוס ההזמנה  
 >באמצעות הפקודה `ALTER TABLE` הוגדר ערך ברירת מחדל (`DEFAULT`) לעמודה `status`, כך שאם בעת יצירת הזמנה חדשה לא מצוין סטטוס – המערכת תשלים אוטומטית את הערך `'Pending'`.  
 >המטרה היא לחסוך צורך בהזנה ידנית של ערך ברוב המקרים ולהבטיח עקביות בנתונים.
 > ![image](https://github.com/user-attachments/assets/e61628d5-c7d4-47e1-8fae-48be62e97ada)
 
 
 
-> ####  אילוץ NOT NULL על טבלת Supplier – שם החברה הוא שדה חובה  
+> ####  -אילוץ NOT NULL על טבלת Supplier – שם החברה הוא שדה חובה  
 >באמצעות הפקודה `ALTER TABLE` הוגדר אילוץ מסוג `NOT NULL` לעמודה `company_name`, כך שאי אפשר להזין ערך ריק (NULL) לשדה זה.  
 >המטרה היא להבטיח שלכל ספק שמוזן למערכת יהיה שם חברה מוגדר.
 > ![image](https://github.com/user-attachments/assets/d7d7f135-fed9-4943-9958-6c6e517da9fe)
