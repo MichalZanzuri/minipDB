@@ -84,7 +84,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 # Stage 2: Queries
 
 
-### *[SelectQueries](Stage2/SelectQueries.sql)
+### [SelectQueries](Stage2/SelectQueries.sql)
 >#### ❶ מספר ההזמנות לכל ספק בכל שנה לפי סטטוס:
 >  שאילתה זו מציגה את מספר ההזמנות שבוצעו לכל ספק, בכל שנה, כשהנתונים מחולקים לפי סטטוס ההזמנה (למשל: הוזמנה, סופקה, בוטלה וכו').
 > מטרת השאילתה היא לספק מבט כולל על רמת הפעילות של כל ספק לאורך השנים.
@@ -135,6 +135,8 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >לאחר הרצה הטבלה תראה כך:
 >![image](https://github.com/user-attachments/assets/804bb708-851c-4428-8a71-1af59cebca29)
 
+
+### [DeleteQueries](Stage2/SelectQueries.sql)
 
 
 
