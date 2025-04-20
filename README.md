@@ -139,5 +139,43 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 ### [DeleteQueries](Stage2/DeleteQueries.sql)
 
 
+>#### ❶ מחיקת הצעות מחיר שתוקפן פג בחודש נבחר (דצמבר 2024):
+
+> שאילתה זו מוחקת את כל הצעות המחיר (Quotation) שפגו בדצמבר 2024.  
+> המטרה היא לנקות מהמערכת הצעות שאינן בתוקף ואינן רלוונטיות.
+> לפני הרצת השאילתא הטבלה נראתה כך:
+> ![image](https://github.com/user-attachments/assets/14474991-75d3-4ef1-a5c1-8da24b6460d6)
+>![image](https://github.com/user-attachments/assets/42e92ada-6e76-47a4-af29-94715088c473)
+> אחרי הרצת השאילתא כאשר month=6 year=2024 הטבלה תראה כך:
+> ![image](https://github.com/user-attachments/assets/69138c80-89ef-4b65-a099-fdb1b570734d)
+
+
+
+> #### ❷ מחיקת מוצרים שלא הוזמנו מעולם:
+> שאילתה זו מוחקת מהמלאי מוצרים שמעולם לא הוזמנו, על פי הצלבה עם טבלת ProductOrder.  
+> כך ניתן לנקות את בסיס הנתונים ממוצרים שאינם פעילים או שאינם מבוקשים.
+> לפני הרצת השאילתא הטבלה נראתה כך:
+> ![image](https://github.com/user-attachments/assets/de70e522-81ea-4a43-b664-82a13e0c4511)
+> ![image](https://github.com/user-attachments/assets/729cc088-854c-41f2-b6ae-c39e6431122b)
+> אחרי הרצת השאילתא לאחר סינון המוצרים, הטבלה תראה כך:
+> ![image](https://github.com/user-attachments/assets/5510a4f0-c668-4c34-a786-c799b423c9a4)
+
+
+
+> #### ❸ מחיקת הצעות מחיר שלא הובילו להזמנה:
+> שאילתה זו מוחקת את כל הצעות המחיר שלא שויכו להזמנה בפועל (order_id IS NULL).  
+> המטרה היא לנקות הצעות שלא מומשו ואינן בשימוש.
+> ![image](https://github.com/user-attachments/assets/60949f96-47a4-420a-99c3-613ad02e737b)
+> ![Uploading image.png…]()
+> אחרי הרצת השאילתא לאחר סינון הצעות המחיר, הטבלה תראה כך:(במקרה הנ"ל לא התקיים התנאי בנתונים הנוכחיים ולכן הטבלה נשארה אותו דבר לאחר הפעלת השאילתא)
+> ![image](https://github.com/user-attachments/assets/60949f96-47a4-420a-99c3-613ad02e737b)
+
+
+### [UpdateQueries](Stage2/DeleteQueries.sql)
+
+
+
+
+
 
 
