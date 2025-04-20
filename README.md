@@ -84,7 +84,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 # Stage 2: Queries
 
 #### Select
--[How many orders each supplier had each year by status](#How_many_orders_each_upplier_had_each_year_by_status)
+-[How many orders each supplier had each year by status](#How_Many_Orders_Each_Upplier_Had_Each_Year_By_Status)
 > שאילתה זו מציגה את מספר ההזמנות שבוצעו לכל ספק, בכל שנה, כשהנתונים מחולקים לפי סטטוס ההזמנה (למשל: הוזמנה, סופקה, בוטלה וכו').
 > מטרת השאילתה היא לספק מבט כולל על רמת הפעילות של כל ספק לאורך השנים.
 - [Introduction](#introduction)
