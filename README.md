@@ -172,12 +172,51 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > שאילתה זו מוחקת את כל הצעות המחיר שלא שויכו להזמנה בפועל (order_id IS NULL).  
 > המטרה היא לנקות הצעות שלא מומשו ואינן בשימוש.
 > ![image](https://github.com/user-attachments/assets/60949f96-47a4-420a-99c3-613ad02e737b)
-> ![Uploading image.png…]()
+>![image](https://github.com/user-attachments/assets/5acb24fc-0815-4f18-9164-2cfd882c430a)
 > אחרי הרצת השאילתא לאחר סינון הצעות המחיר, הטבלה תראה כך:(במקרה הנ"ל לא התקיים התנאי בנתונים הנוכחיים ולכן הטבלה נשארה אותו דבר לאחר הפעלת השאילתא)
 > ![image](https://github.com/user-attachments/assets/60949f96-47a4-420a-99c3-613ad02e737b)
 
 
-### [UpdateQueries](Stage2/DeleteQueries.sql)
+### [UpdateQueries](Stage2/UpdateQueries.sql)
+
+>#### ❶ עדכון מחירים – עלייה של 10% למוצרים שנמכרו ביותר מ־100 פעמים:
+> עדכון זה מעלה את המחיר ב־10% לכל המוצרים שנמכרו ביותר מ־100 פעמים.  
+> המטרה היא להתאים את המחיר בהתאם לביקוש הגבוה.
+>לפני הרצת השאילתא הטבלה תראה כך:
+>![image](https://github.com/user-attachments/assets/f28ecc01-1dc7-49c9-8a17-eb8597020e10)
+>![image](https://github.com/user-attachments/assets/d8311d36-9855-4219-8eef-126a81197d83)
+>לאחר הרצת השאילתא ועדכון המחירים :
+>![image](https://github.com/user-attachments/assets/be2e7c66-93b8-403a-bd01-99e7f151c91b)
+
+
+
+
+
+> #### ❷ עדכון תפקיד לעובדים עם ותק של 3 שנים – שינוי ל־"Senior":
+> עדכון זה משנה את שם התפקיד של כל עובד שהתקבל לעבודה לפני שלוש שנים או יותר ל־"Senior".  
+> המטרה היא לשקף את הוותק והניסיון של העובדים במערכת.
+> לפני הרצת השאילתא הטבלה תראה כך:
+> ![image](https://github.com/user-attachments/assets/6e254b7f-9218-46f1-8c35-62cab2c8fed3)
+> ![image](https://github.com/user-attachments/assets/22c6a255-3880-4f0f-b8cd-723e97b58d3a)
+> לאחר הרצת השאילתא ועדכון שם התפקיד לעובדים, הטבלה תראה כך:
+> ![image](https://github.com/user-attachments/assets/dce84fbd-7ce2-45c9-9310-4d642a0bb4be)
+
+
+
+
+
+> #### ❸ עדכון מחיר – הנחה של 20% לכל המוצרים בקטגוריה מסוימת:
+> עדכון זה מוריד את המחיר ב־20% לכל המוצרים ששייכים לקטגוריה מסוימת (במקרה הזה 'test').  
+> המטרה היא להפעיל מבצע או לקדם מוצרים מקטגוריה ספציפית.
+> לפני הרצת השאילתא הטבלה תראה כך:
+> ![image](https://github.com/user-attachments/assets/fc228137-5574-49e7-9828-301e15b172d7)
+> ![image](https://github.com/user-attachments/assets/5f30cf55-4a03-4a8b-8c32-f121247c09c9)
+> לאחר הרצת השאילתא ועדכון המחירים למוצרים, הטבלה תראה כך:
+> ![image](https://github.com/user-attachments/assets/91a2fe04-a098-41df-8321-3c587d6e2d56)
+
+
+
+
 
 
 
