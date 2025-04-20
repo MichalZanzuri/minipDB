@@ -136,7 +136,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >![image](https://github.com/user-attachments/assets/804bb708-851c-4428-8a71-1af59cebca29)
 
 
-### [DeleteQueries](Stage2/SelectQueries.sql)
+### [DeleteQueries](Stage2/DeleteQueries.sql)
 
 
 
