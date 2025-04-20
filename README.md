@@ -151,8 +151,10 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > המטרה היא לנקות מהמערכת הצעות שאינן בתוקף ואינן רלוונטיות.
 > לפני הרצת השאילתא הטבלה נראתה כך:
 > ![image](https://github.com/user-attachments/assets/14474991-75d3-4ef1-a5c1-8da24b6460d6)
+> 
 >![image](https://github.com/user-attachments/assets/42e92ada-6e76-47a4-af29-94715088c473)
 > אחרי הרצת השאילתא כאשר month=6 year=2024 הטבלה תראה כך:
+> 
 > ![image](https://github.com/user-attachments/assets/69138c80-89ef-4b65-a099-fdb1b570734d)
 
 
@@ -162,8 +164,10 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > כך ניתן לנקות את בסיס הנתונים ממוצרים שאינם פעילים או שאינם מבוקשים.
 > לפני הרצת השאילתא הטבלה נראתה כך:
 > ![image](https://github.com/user-attachments/assets/de70e522-81ea-4a43-b664-82a13e0c4511)
+> 
 > ![image](https://github.com/user-attachments/assets/729cc088-854c-41f2-b6ae-c39e6431122b)
 > אחרי הרצת השאילתא לאחר סינון המוצרים, הטבלה תראה כך:
+> 
 > ![image](https://github.com/user-attachments/assets/5510a4f0-c668-4c34-a786-c799b423c9a4)
 
 
@@ -172,8 +176,10 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > שאילתה זו מוחקת את כל הצעות המחיר שלא שויכו להזמנה בפועל (order_id IS NULL).  
 > המטרה היא לנקות הצעות שלא מומשו ואינן בשימוש.
 > ![image](https://github.com/user-attachments/assets/60949f96-47a4-420a-99c3-613ad02e737b)
+> 
 >![image](https://github.com/user-attachments/assets/5acb24fc-0815-4f18-9164-2cfd882c430a)
 > אחרי הרצת השאילתא לאחר סינון הצעות המחיר, הטבלה תראה כך:(במקרה הנ"ל לא התקיים התנאי בנתונים הנוכחיים ולכן הטבלה נשארה אותו דבר לאחר הפעלת השאילתא)
+> 
 > ![image](https://github.com/user-attachments/assets/60949f96-47a4-420a-99c3-613ad02e737b)
 
 
@@ -184,8 +190,10 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > המטרה היא להתאים את המחיר בהתאם לביקוש הגבוה.
 >לפני הרצת השאילתא הטבלה תראה כך:
 >![image](https://github.com/user-attachments/assets/f28ecc01-1dc7-49c9-8a17-eb8597020e10)
+>
 >![image](https://github.com/user-attachments/assets/d8311d36-9855-4219-8eef-126a81197d83)
 >לאחר הרצת השאילתא ועדכון המחירים :
+>
 >![image](https://github.com/user-attachments/assets/be2e7c66-93b8-403a-bd01-99e7f151c91b)
 
 
@@ -197,8 +205,10 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > המטרה היא לשקף את הוותק והניסיון של העובדים במערכת.
 > לפני הרצת השאילתא הטבלה תראה כך:
 > ![image](https://github.com/user-attachments/assets/6e254b7f-9218-46f1-8c35-62cab2c8fed3)
+> 
 > ![image](https://github.com/user-attachments/assets/22c6a255-3880-4f0f-b8cd-723e97b58d3a)
 > לאחר הרצת השאילתא ועדכון שם התפקיד לעובדים, הטבלה תראה כך:
+> 
 > ![image](https://github.com/user-attachments/assets/dce84fbd-7ce2-45c9-9310-4d642a0bb4be)
 
 
@@ -210,8 +220,10 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > המטרה היא להפעיל מבצע או לקדם מוצרים מקטגוריה ספציפית.
 > לפני הרצת השאילתא הטבלה תראה כך:
 > ![image](https://github.com/user-attachments/assets/fc228137-5574-49e7-9828-301e15b172d7)
+> 
 > ![image](https://github.com/user-attachments/assets/5f30cf55-4a03-4a8b-8c32-f121247c09c9)
 > לאחר הרצת השאילתא ועדכון המחירים למוצרים, הטבלה תראה כך:
+> 
 > ![image](https://github.com/user-attachments/assets/91a2fe04-a098-41df-8321-3c587d6e2d56)
 
 
