@@ -212,6 +212,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 
 > 
 > ![image](https://github.com/user-attachments/assets/22c6a255-3880-4f0f-b8cd-723e97b58d3a)
+> 
 > לאחר הרצת השאילתא ועדכון שם התפקיד לעובדים, הטבלה תראה כך:
 > 
 > ![image](https://github.com/user-attachments/assets/5304a98b-ead6-47a7-a0fb-ff0e6e94c666)
