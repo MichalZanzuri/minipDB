@@ -257,6 +257,8 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > ![image](https://github.com/user-attachments/assets/d7d7f135-fed9-4943-9958-6c6e517da9fe)
 
 
+## Backup
+**[Backups](Stage2/Backups)**
 
 
 
