@@ -226,7 +226,8 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > ![image](https://github.com/user-attachments/assets/c9fd10ca-8df8-43eb-99be-899cfdfd740f)
 
 > 
-> ![image](https://github.com/user-attachments/assets/0d7eee77-1cd8-4ff6-ab84-49513b6a6c18)
+> ![image](https://github.com/user-attachments/assets/2bacfaae-2a33-42e3-a951-a9c54d7d4f67)
+
 
 > לאחר הרצת השאילתא ועדכון המחירים למוצרים, הטבלה תראה כך:
 > 
