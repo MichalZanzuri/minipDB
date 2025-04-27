@@ -192,36 +192,47 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > המטרה היא להתאים את המחיר בהתאם לביקוש הגבוה.
 > לפני הרצת השאילתא הטבלה תראה כך:
 > 
-> ![image](https://github.com/user-attachments/assets/f28ecc01-1dc7-49c9-8a17-eb8597020e10)
+> ![image](https://github.com/user-attachments/assets/423eb612-2877-4aa1-bf81-286940595604)
+
 > 
-> ![image](https://github.com/user-attachments/assets/d8311d36-9855-4219-8eef-126a81197d83)
+> ![image](https://github.com/user-attachments/assets/a87d4c77-78fb-4057-afe5-3145a4860809)
+> 
+
 > לאחר הרצת השאילתא ועדכון המחירים :
 > 
-> ![image](https://github.com/user-attachments/assets/be2e7c66-93b8-403a-bd01-99e7f151c91b)
+> ![image](https://github.com/user-attachments/assets/c6c202ae-1281-4eb6-b912-032be69d52e6)
+
 
 > #### ❷ עדכון תפקיד לעובדים עם ותק של 3 שנים – שינוי ל־"Senior":
 > עדכון זה משנה את שם התפקיד של כל עובד שהתקבל לעבודה לפני שלוש שנים או יותר ל־"Senior".  
 > המטרה היא לשקף את הוותק והניסיון של העובדים במערכת.
 > לפני הרצת השאילתא הטבלה תראה כך:
 > 
-> ![image](https://github.com/user-attachments/assets/6e254b7f-9218-46f1-8c35-62cab2c8fed3)
+> ![image](https://github.com/user-attachments/assets/e6de4859-d1c7-450b-a8c8-99ceed16b8a6)
+
 > 
 > ![image](https://github.com/user-attachments/assets/22c6a255-3880-4f0f-b8cd-723e97b58d3a)
 > לאחר הרצת השאילתא ועדכון שם התפקיד לעובדים, הטבלה תראה כך:
 > 
-> ![image](https://github.com/user-attachments/assets/dce84fbd-7ce2-45c9-9310-4d642a0bb4be)
+> ![image](https://github.com/user-attachments/assets/5304a98b-ead6-47a7-a0fb-ff0e6e94c666)
+> 
+
 
 > #### ❸ עדכון מחיר – הנחה של 20% לכל המוצרים בקטגוריה מסוימת:
 > עדכון זה מוריד את המחיר ב־20% לכל המוצרים ששייכים לקטגוריה מסוימת (במקרה הזה 'test').  
 > המטרה היא להפעיל מבצע או לקדם מוצרים מקטגוריה ספציפית.
 > לפני הרצת השאילתא הטבלה תראה כך:
 > 
-> ![image](https://github.com/user-attachments/assets/fc228137-5574-49e7-9828-301e15b172d7)
+> ![image](https://github.com/user-attachments/assets/c9fd10ca-8df8-43eb-99be-899cfdfd740f)
+
 > 
-> ![image](https://github.com/user-attachments/assets/5f30cf55-4a03-4a8b-8c32-f121247c09c9)
+> ![image](https://github.com/user-attachments/assets/0d7eee77-1cd8-4ff6-ab84-49513b6a6c18)
+
 > לאחר הרצת השאילתא ועדכון המחירים למוצרים, הטבלה תראה כך:
 > 
-> ![image](https://github.com/user-attachments/assets/91a2fe04-a098-41df-8321-3c587d6e2d56)
+> ![image](https://github.com/user-attachments/assets/56129732-24e5-4fe2-a1fb-4abd3ace479a)
+
+> 
 
 ### [Constraints](Stage2/Constraints.sql)
 
