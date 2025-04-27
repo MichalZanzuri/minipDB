@@ -174,12 +174,14 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > שאילתה זו מוחקת את כל הצעות המחיר שלא שויכו להזמנה בפועל (order_id IS NULL).  
 > המטרה היא לנקות הצעות שלא מומשו ואינן בשימוש.
 > 
-> ![image](https://github.com/user-attachments/assets/60949f96-47a4-420a-99c3-613ad02e737b)
+> ![image](https://github.com/user-attachments/assets/54151f2a-6dde-4a96-afd3-bbcfa8555d9b)
+
 > 
 > ![image](https://github.com/user-attachments/assets/5acb24fc-0815-4f18-9164-2cfd882c430a)
 > אחרי הרצת השאילתא לאחר סינון הצעות המחיר, הטבלה תראה כך:(במקרה הנ"ל לא התקיים התנאי בנתונים הנוכחיים ולכן הטבלה נשארה אותו דבר לאחר הפעלת השאילתא)
 > 
-> ![image](https://github.com/user-attachments/assets/60949f96-47a4-420a-99c3-613ad02e737b)
+> ![image](https://github.com/user-attachments/assets/df57b057-8d1f-431e-a29f-14cffab7eb4a)
+
 
 ### [UpdateQueries](Stage2/UpdateQueries.sql)
 
