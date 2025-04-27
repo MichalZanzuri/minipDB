@@ -161,13 +161,14 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > כך ניתן לנקות את בסיס הנתונים ממוצרים שאינם פעילים או שאינם מבוקשים.
 > לפני הרצת השאילתא הטבלה נראתה כך:
 > 
-> ![image](https://github.com/user-attachments/assets/729cc088-854c-41f2-b6ae-c39e6431122b)
+>![image](https://github.com/user-attachments/assets/6b7c3a89-947c-42cc-a0bf-63fced3bba1b)
 >
 >  ![image](https://github.com/user-attachments/assets/de70e522-81ea-4a43-b664-82a13e0c4511)
 
 > אחרי הרצת השאילתא לאחר סינון המוצרים, הטבלה תראה כך:
 > 
-> ![image](https://github.com/user-attachments/assets/5510a4f0-c668-4c34-a786-c799b423c9a4)
+> ![image](https://github.com/user-attachments/assets/90344e62-d6fe-461c-a3c4-0134682f04b5)
+
 
 > #### ❸ מחיקת הצעות מחיר שלא הובילו להזמנה:
 > שאילתה זו מוחקת את כל הצעות המחיר שלא שויכו להזמנה בפועל (order_id IS NULL).  
