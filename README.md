@@ -154,7 +154,6 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >
 > אחרי הרצת השאילתא כאשר month=6 year=2024 הטבלה תראה כך
 >
->
 > ![image](https://github.com/user-attachments/assets/69138c80-89ef-4b65-a099-fdb1b570734d)
 
 > #### ❷ מחיקת מוצרים שלא הוזמנו מעולם:
