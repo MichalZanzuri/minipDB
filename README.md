@@ -151,7 +151,8 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > ![image](https://github.com/user-attachments/assets/14474991-75d3-4ef1-a5c1-8da24b6460d6)
 > 
 > ![image](https://github.com/user-attachments/assets/42e92ada-6e76-47a4-af29-94715088c473)
-> אחרי הרצת השאילתא כאשר month=6 year=2024 הטבלה תראה כך:
+>
+> אחרי הרצת השאילתא כאשר month=6 year=2024 הטבלה תראה כך
 >
 >
 > ![image](https://github.com/user-attachments/assets/69138c80-89ef-4b65-a099-fdb1b570734d)
