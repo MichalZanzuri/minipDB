@@ -177,7 +177,9 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 > ![image](https://github.com/user-attachments/assets/54151f2a-6dde-4a96-afd3-bbcfa8555d9b)
 
 > 
-> ![image](https://github.com/user-attachments/assets/5acb24fc-0815-4f18-9164-2cfd882c430a)
+> ![image](https://github.com/user-attachments/assets/03a34b2d-ab3e-406b-9132-f00fe2285c90)
+> 
+
 > אחרי הרצת השאילתא לאחר סינון הצעות המחיר, הטבלה תראה כך:(במקרה הנ"ל לא התקיים התנאי בנתונים הנוכחיים ולכן הטבלה נשארה אותו דבר לאחר הפעלת השאילתא)
 > 
 > ![image](https://github.com/user-attachments/assets/df57b057-8d1f-431e-a29f-14cffab7eb4a)
