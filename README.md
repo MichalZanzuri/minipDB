@@ -265,7 +265,8 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 המטרה בשלב זה היתה למזג בין 2 בסיסי נתונים
 בסיס הנתונים שלנו הוא mydatabase לו היו מספר טבלאות מלאות בערכים, ובסיס נתונים נוסף בשם LHDB בו היו חלק מהטבלאות שונות והערכים שונים
 >#### ERD LHDB
->https://github.com/MichalZanzuri/minipDB/blob/afd402127f863b3da5e722eed70970d95b23b777/Stage3/ERD_LHDB.png
+>![ERD_LHDB](https://github.com/user-attachments/assets/1f4569a9-4574-4e2a-80ad-c70abbe26fa0)
+>
 >#### DSD LHDB
 >ERD Merged_DB
 >DSD Merged_DB
