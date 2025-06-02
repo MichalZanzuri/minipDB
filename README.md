@@ -261,6 +261,15 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 **[Backups](Stage2/Backups)**
 
 
+# Stage 3: Integration and Views
+המטרה בשלב זה היתה למזג בין 2 בסיסי נתונים
+בסיס הנתונים שלנו הוא mydatabase לו היו מספר טבלאות מלאות בערכים, ובסיס נתונים נוסף בשם LHDB בו היו חלק מהטבלאות שונות והערכים שונים
+>#### ERD LHDB
+>Stage3/ERD_LHDB.png
+>#### DSD LHDB
+>ERD Merged_DB
+>DSD Merged_DB
+
 
 
 
