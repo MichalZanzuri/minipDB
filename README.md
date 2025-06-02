@@ -276,7 +276,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >#### DSD Merged_DB
 >![Merged_DB DSD](https://github.com/user-attachments/assets/52f81e3b-5639-48aa-9092-bc15bb572db3)
 >
->Stage3/Integrate
+>[Integrate](Stage3/Integrate)
 
 
 
