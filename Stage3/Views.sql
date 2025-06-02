@@ -11,7 +11,7 @@ FROM Order_d o
 JOIN supplier s ON o.supplier_id = s.supplier_id
 JOIN employee e ON o.employee_id = e.personid;
 
---כל ההזמנות שבוצעו על ידי עובד מסוים
+--All orders placed by a specific employee
 SELECT *
 FROM supplier_orders_with_employee
 WHERE fullname = 'Dana Snyder';
@@ -22,7 +22,7 @@ FROM supplier_orders_with_employee
 LIMIT 1;
 
 
---כמה הזמנות ביצע כל עובד
+--How many orders did each employee place
 SELECT fullname, COUNT(*) AS total_orders
 FROM supplier_orders_with_employee
 GROUP BY fullname;
@@ -41,10 +41,10 @@ FROM customer c
 LEFT JOIN sale sa ON c.personid = sa.customerid;
 
 
---כל הלקוחות עם המכירות שלהם
+--All customers with their sales
 SELECT * FROM customer_sales_view;
 
---כל הלקוחות שביצעו מכירה בתאריך מסוים
+--All customers who made a sale on a specific date
 SELECT *
 FROM customer_sales_view
 WHERE saledate = '2025-05-01';
