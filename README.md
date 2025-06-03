@@ -298,7 +298,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >שאילתה 1 על המבט מציגה את כל ההזמנות שביצע העובד לפי שם העובד.
 >קוד:
 >
->### ![צילום מסך 2025-06-03 192928](https://github.com/user-attachments/assets/ac0680b3-43fa-473c-a13a-ff437d02496a)
+>![צילום מסך 2025-06-03 192928](https://github.com/user-attachments/assets/ac0680b3-43fa-473c-a13a-ff437d02496a)
 
 >
 >פלט:
@@ -309,9 +309,8 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >שאילתה 2 על המבט מציגה כמה הזמנות ביצע כל עובד – סופרת לפי שם העובד.
 >קוד:
 >
->SELECT fullname, COUNT(*) AS total_orders
->FROM supplier_orders_with_employee
->GROUP BY fullname;
+>![image](https://github.com/user-attachments/assets/c256edb5-1029-4143-989a-d5b1fe05fdc3)
+
 >פלט:
 >
 >![image](https://github.com/user-attachments/assets/5d8f4a62-ab45-4526-a8f1-f9d75a089656)
@@ -325,17 +324,18 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 
 >שאילתה 1 על המבט מציגה את כל הלקוחות יחד עם פרטי המכירות שלהם – אם קיימות.
 >קוד:
->SELECT * FROM customer_sales_view;
+>![image](https://github.com/user-attachments/assets/c0b187c3-6f1e-4707-879e-ccd963fbe908)
+
 >פלט:
 >
->![image](https://github.com/user-attachments/assets/b7e494ba-9a14-4e04-8f9b-c5d1c169c142)
+>![image](https://github.com/user-attachments/assets/ce82b663-9f85-4e95-917e-3a0c262082e1)
+
 
 
 >שאילתה 2 על המבט מציגה מי מהלקוחות ביצע רכישה לי תאריך לפי הפורמט YYYY-MM-DD.
 >קוד:
->SELECT *
->FROM customer_sales_view
->WHERE saledate = '2025-05-01';
+>![image](https://github.com/user-attachments/assets/ecd5efdb-19d2-4a0a-8e51-f46c0ad58b3a)
+
 >פלט:
 >
 >![image](https://github.com/user-attachments/assets/9f8337e9-0743-4779-9939-913544f13df4)
