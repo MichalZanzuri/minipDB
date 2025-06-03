@@ -270,13 +270,71 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >#### DSD LHDB
 >![DSD_LHDB](https://github.com/user-attachments/assets/d4359059-2423-4b3f-b0eb-765470afc054)
 
->#### ERD Merged_DB
+
+>
+>[Integrate](Stage3/Integrate)
+לצורך ביצוע האינטגרציה בין שני בסיסי הנתונים, ביצענו את הצעדים הבאים:
+- טענו את קובצי הגיבוי של שני האגפים אל תוך בסיס נתונים חדש, כך שכל טבלה קיימת קיבלה שם חדש עם הסיומת _X_temp – לדוגמה: Product_X_temp, Customer_X_temp.
+- יצרנו טבלאות חדשות בשם הקלאסי של כל ישות מתוך תרשימי ה־ERD, והעברנו אליהן את העמודות שנבחרו מבין שתי הגרסאות של הטבלאות, תוך שמירה על שמות עקביים ומבנה נורמלי. הנתונים המתאימים לכל עמודה הועתקו גם כן בעזרת שאילתות INSERT INTO ... SELECT.
+- מאחר שלשתי טבלאות – Employee ו־Customer – היו עמודות משותפות כמו FullName, יצרנו טבלת־אב בשם Person. טבלאות הבת מכילות מפתח זר (PersonId) שמצביע על הרשומה המתאימה בטבלת־האב. כך נמנעה כפילות והושגה אחידות מבנית.
+- טבלאות שהיו קיימות רק באגף שלנו (למשל ReturnProduct, Order_d) נותרו ללא שינוי. טבלאות חדשות מהאגף השני (למשל Store, Discount, StoreSale) נבנו מחדש והוזנו אליהן נתונים רלוונטיים מהמקורות הקיימים.
+- לצורך שליפת מידע מבסיס הנתונים השני-LHDB, נעשה שימוש בפקודת dblink, שאפשרה שליפת נתונים ממסד LHDB, והשוואתם לרשומות הקיימות כדי למנוע כפילויות. הנתונים הוזנו אל טבלאות כמו Product תוך המרה והתאמה לעמודות החדשות.
+תרשימי בסיס הנתונים הסופי שיצרנו:
+  >#### ERD Merged_DB
 >![Merged_DB](https://github.com/user-attachments/assets/d837ba84-b6ea-4513-9a80-907baded9229)
 
 >#### DSD Merged_DB
 >![Merged_DB DSD](https://github.com/user-attachments/assets/52f81e3b-5639-48aa-9092-bc15bb572db3)
+
+
 >
->[Integrate](Stage3/Integrate)
+>#### Views
+>####  View 1:supplier_orders_with_employee
+>מציג את כל ההזמנות שבוצעו על ידי עובדים, כולל פרטי ההזמנה, שם העובד ושם הספק.
+הוא משלב בין שלוש טבלאות: Order_d, supplier, ו־employee
+>![image](https://github.com/user-attachments/assets/a6709b8e-4a8b-4823-b474-8ac6c656cbdc)
+
+>שאילתה 1 על המבט מציגה את כל ההזמנות שביצע העובד לפי שם העובד.
+>קוד:
+>SELECT *
+FROM supplier_orders_with_employee
+WHERE fullname = 'Dana Snyder';
+>פלט:
+>![image](https://github.com/user-attachments/assets/c38e482f-da2f-4d0d-a467-b001d5717073)
+
+
+>שאילתה 2 על המבט מציגה כמה הזמנות ביצע כל עובד – סופרת לפי שם העובד.
+>קוד:
+>SELECT fullname, COUNT(*) AS total_orders
+FROM supplier_orders_with_employee
+GROUP BY fullname;
+>פלט:
+>![image](https://github.com/user-attachments/assets/5d8f4a62-ab45-4526-a8f1-f9d75a089656)
+
+
+>#### View 2: customer_sales_view
+>המבט הזה מציג את כל הלקוחות ואת המכירות שהם ביצעו (אם בכלל).
+אם לקוח לא ביצע מכירה – הוא עדיין יופיע (בזכות LEFT JOIN)
+>![image](https://github.com/user-attachments/assets/80f779a4-ba3a-49ff-87a7-f884017beba6)
+
+>שאילתה 1 על המבט מציגה את כל הלקוחות יחד עם פרטי המכירות שלהם – אם קיימות.
+>קוד:
+>SELECT * FROM customer_sales_view;
+>פלט:
+>![image](https://github.com/user-attachments/assets/b7e494ba-9a14-4e04-8f9b-c5d1c169c142)
+
+
+>שאילתה 2 על המבט מציגה מי מהלקוחות ביצע רכישה לי תאריך לפי הפורמט YYYY-MM-DD.
+>קוד:
+>SELECT *
+FROM customer_sales_view
+WHERE saledate = '2025-05-01';
+>פלט:
+>![image](https://github.com/user-attachments/assets/9f8337e9-0743-4779-9939-913544f13df4)
+
+
+>
+
 
 
 
