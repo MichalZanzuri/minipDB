@@ -326,11 +326,12 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >
 >קוד:
 >
->![image](https://github.com/user-attachments/assets/c0b187c3-6f1e-4707-879e-ccd963fbe908)
+>![image](https://github.com/user-attachments/assets/ce82b663-9f85-4e95-917e-3a0c262082e1)
 
 >פלט:
 >
->![image](https://github.com/user-attachments/assets/ce82b663-9f85-4e95-917e-3a0c262082e1)
+>![image](https://github.com/user-attachments/assets/56c8f23c-14cb-48f0-bdd7-f0d75bc3635b)
+
 
 
 
