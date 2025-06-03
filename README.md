@@ -279,7 +279,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 - מאחר שלשתי טבלאות – Employee ו־Customer – היו עמודות משותפות כמו FullName, יצרנו טבלת־אב בשם Person. טבלאות הבת מכילות מפתח זר (PersonId) שמצביע על הרשומה המתאימה בטבלת־האב. כך נמנעה כפילות והושגה אחידות מבנית.
 - טבלאות שהיו קיימות רק באגף שלנו (למשל ReturnProduct, Order_d) נותרו ללא שינוי. טבלאות חדשות מהאגף השני (למשל Store, Discount, StoreSale) נבנו מחדש והוזנו אליהן נתונים רלוונטיים מהמקורות הקיימים.
 - לצורך שליפת מידע מבסיס הנתונים השני-LHDB, נעשה שימוש בפקודת dblink, שאפשרה שליפת נתונים ממסד LHDB, והשוואתם לרשומות הקיימות כדי למנוע כפילויות. הנתונים הוזנו אל טבלאות כמו Product תוך המרה והתאמה לעמודות החדשות.
-- 
+  
 תרשימי בסיס הנתונים הסופי שיצרנו:
   >#### ERD Merged_DB
 >![Merged_DB](https://github.com/user-attachments/assets/d837ba84-b6ea-4513-9a80-907baded9229)
