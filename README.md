@@ -325,6 +325,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >שאילתה 1 על המבט מציגה את כל הלקוחות יחד עם פרטי המכירות שלהם – אם קיימות.
 >
 >קוד:
+>
 >![image](https://github.com/user-attachments/assets/c0b187c3-6f1e-4707-879e-ccd963fbe908)
 
 >פלט:
@@ -336,6 +337,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >שאילתה 2 על המבט מציגה מי מהלקוחות ביצע רכישה לי תאריך לפי הפורמט YYYY-MM-DD.
 >
 >קוד:
+>
 >![image](https://github.com/user-attachments/assets/ecd5efdb-19d2-4a0a-8e51-f46c0ad58b3a)
 
 >פלט:
