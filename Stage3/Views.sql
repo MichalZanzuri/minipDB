@@ -1,4 +1,4 @@
---supplier_orders_with_employee
+--View1:supplier_orders_with_employee
 CREATE VIEW supplier_orders_with_employee AS
 SELECT
     o.order_id,
@@ -11,23 +11,20 @@ FROM Order_d o
 JOIN supplier s ON o.supplier_id = s.supplier_id
 JOIN employee e ON o.employee_id = e.personid;
 
---All orders placed by a specific employee
+--1.1:All orders placed by a specific employee
 SELECT *
 FROM supplier_orders_with_employee
 WHERE fullname = 'Dana Snyder';
 
---check the name of column of views
-SELECT *
-FROM supplier_orders_with_employee
-LIMIT 1;
-
-
---How many orders did each employee place
+--1.2:How many orders did each employee place
 SELECT fullname, COUNT(*) AS total_orders
 FROM supplier_orders_with_employee
 GROUP BY fullname;
 
---customer_sales_view
+--check the name of column of views
+SELECT * FROM supplier_orders_with_employee
+
+--View2:customer_sales_view
 CREATE OR REPLACE VIEW customer_sales_view AS
 SELECT
     c.personid,
@@ -41,10 +38,12 @@ FROM customer c
 LEFT JOIN sale sa ON c.personid = sa.customerid;
 
 
---All customers with their sales
+--2.1:All customers with their sales
 SELECT * FROM customer_sales_view;
 
---All customers who made a sale on a specific date
+--2.2:All customers who made a sale on a specific date
 SELECT *
 FROM customer_sales_view
 WHERE saledate = '2025-05-01';
+
+SELECT * FROM customer_sales_view
