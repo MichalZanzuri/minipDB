@@ -299,8 +299,11 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >קוד:
 >
 >SELECT *
+>
 >FROM supplier_orders_with_employee
+>
 >WHERE fullname = 'Dana Snyder';
+>
 >פלט:
 >
 >![image](https://github.com/user-attachments/assets/c38e482f-da2f-4d0d-a467-b001d5717073)
