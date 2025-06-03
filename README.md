@@ -298,7 +298,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >שאילתה 1 על המבט מציגה את כל ההזמנות שביצע העובד לפי שם העובד.
 >קוד:
 >
->![צילום מסך 2025-06-03 192928](https://github.com/user-attachments/assets/ac0680b3-43fa-473c-a13a-ff437d02496a)
+>### ![צילום מסך 2025-06-03 192928](https://github.com/user-attachments/assets/ac0680b3-43fa-473c-a13a-ff437d02496a)
 
 >
 >פלט:
