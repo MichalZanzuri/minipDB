@@ -297,40 +297,47 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 
 >שאילתה 1 על המבט מציגה את כל ההזמנות שביצע העובד לפי שם העובד.
 >קוד:
+>
 >SELECT *
-FROM supplier_orders_with_employee
-WHERE fullname = 'Dana Snyder';
+>FROM supplier_orders_with_employee
+>WHERE fullname = 'Dana Snyder';
 >פלט:
+>
 >![image](https://github.com/user-attachments/assets/c38e482f-da2f-4d0d-a467-b001d5717073)
 
 
 >שאילתה 2 על המבט מציגה כמה הזמנות ביצע כל עובד – סופרת לפי שם העובד.
 >קוד:
+>
 >SELECT fullname, COUNT(*) AS total_orders
-FROM supplier_orders_with_employee
-GROUP BY fullname;
+>FROM supplier_orders_with_employee
+>GROUP BY fullname;
 >פלט:
+>
 >![image](https://github.com/user-attachments/assets/5d8f4a62-ab45-4526-a8f1-f9d75a089656)
 
 
 >#### View 2: customer_sales_view
 >המבט הזה מציג את כל הלקוחות ואת המכירות שהם ביצעו (אם בכלל).
 אם לקוח לא ביצע מכירה – הוא עדיין יופיע (בזכות LEFT JOIN)
+>
 >![image](https://github.com/user-attachments/assets/80f779a4-ba3a-49ff-87a7-f884017beba6)
 
 >שאילתה 1 על המבט מציגה את כל הלקוחות יחד עם פרטי המכירות שלהם – אם קיימות.
 >קוד:
 >SELECT * FROM customer_sales_view;
 >פלט:
+>
 >![image](https://github.com/user-attachments/assets/b7e494ba-9a14-4e04-8f9b-c5d1c169c142)
 
 
 >שאילתה 2 על המבט מציגה מי מהלקוחות ביצע רכישה לי תאריך לפי הפורמט YYYY-MM-DD.
 >קוד:
 >SELECT *
-FROM customer_sales_view
-WHERE saledate = '2025-05-01';
+>FROM customer_sales_view
+>WHERE saledate = '2025-05-01';
 >פלט:
+>
 >![image](https://github.com/user-attachments/assets/9f8337e9-0743-4779-9939-913544f13df4)
 
 
