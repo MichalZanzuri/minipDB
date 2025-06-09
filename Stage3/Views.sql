@@ -39,11 +39,14 @@ LEFT JOIN sale sa ON c.personid = sa.customerid;
 
 
 --2.1:All customers with their sales
-SELECT * FROM customer_sales_view;
+SELECT COUNT(*)
+FROM customer_sales_view
+WHERE totalprice >=200 ;
 
 --2.2:All customers who made a sale on a specific date
 SELECT *
 FROM customer_sales_view
 WHERE saledate = '2025-05-01';
 
+--check the name of column of views
 SELECT * FROM customer_sales_view
