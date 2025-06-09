@@ -322,7 +322,7 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >
 >![image](https://github.com/user-attachments/assets/80f779a4-ba3a-49ff-87a7-f884017beba6)
 
->שאילתה 1 על המבט מציגה את כל הלקוחות שקנו מעל סכום מסוים.
+>שאילתה 1 על המבט מציגה את כמות הלקוחות שקנו מעל סכום מסוים.
 >
 >קוד:
 >
