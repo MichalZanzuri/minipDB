@@ -15,7 +15,6 @@ SELECT storeid,
        revenue
 FROM store_temp;
 
-DROP TABLE IF EXISTS store_temp;
 
 --person table--
 INSERT INTO person (personid, fullname, joinperson)
@@ -105,8 +104,3 @@ SELECT
     p.minamount
 FROM product_temp pt
 LEFT JOIN product p ON pt.productid = p.product_id;
-
-
-
-
-
