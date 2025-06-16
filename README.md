@@ -406,7 +406,32 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >
 >![image](https://github.com/user-attachments/assets/5f6f405d-590d-43bd-a1af-412a8d8ce132)
 >
+>### Main Program
 >
+>#### [main_update_customer_sale.sql](Stage4/Main_Program/main_update_customer_sale.sql)
+>התוכנית מציגה את כל המכירות של לקוח לפני ואחרי עדכון מחיר מכירה.
+>התוכנית משלבת בין פונקציה לפרוצדורה.
+>
+>![image](https://github.com/user-attachments/assets/f92d1e91-fe07-4016-b08e-fb554d3a877d)
+>
+>#### [program_apply_discount_top_selling_product.sql](Stage4/Main_Program/program_apply_discount_top_selling_product.sql)
+>התוכנית מאתרת את המוצר הכי נמכר, ומוסיפה לו הנחה.
+>
+>![image](https://github.com/user-attachments/assets/9536da07-bf63-4b10-b22e-12224f012362)
+>
+>![image](https://github.com/user-attachments/assets/a910a5f4-2369-4296-90c6-d60f3e02aa1a)
+>
+>###  ALTER TABLE
+>#### [ALTER TABLE.sql](Stage4/ALTER_TABLE.sql)
+>הוספת העמודה last_updated לטבלת product לצורך כתיבת הטריגר update_last_updated_column
+>הסרת העמודה discountid והוספתה מחדש כ־IDENTITY PRIMARY KEY לצורך כתיבת התוכנית program_apply_discount_top_selling_product
+>
+
+
+
+
+
+
 
 
 
