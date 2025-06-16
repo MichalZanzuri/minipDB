@@ -349,6 +349,73 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 
 >
 
+# Stage 4: Programming
+בשלב זה יצרנו תוכניות לא טריוויאליות בשפת PL/pgSQL אשר כוללות פונקציות, פרוצדורות, טריגרים ותוכניות ראשיות. כל תוכנית עושה שימוש ברכיבי תכנות מתקדמים כמו לולאות, תנאים, חריגות, רשומות ופקודות DML. בנוסף, ביצענו שינויים בטבלאות בסיס הנתונים לפי הצורך, ותיעדנו אותם בקובץ ALTER.
+
+>### Function
+>>#### [get_low_stock_products.sql](Stage4/Function/get_low_stock_products.sql)
+>> הפונקציה מחזירה את כל המוצרים שיש להם פחות מ־10 יחידות במלאי.
+>>הפונקציה נועדה לעקוב אחרי מלאי חסר.
+>>
+>>![image](https://github.com/user-attachments/assets/e7f3ec83-81a4-475d-b1ab-13499c66812a)
+>>
+
+
+>>
+>>#### [get_total_sales_for_customer.sql](Stage4/Function/get_total_sales_for_customer.sql)
+>>הפונקציה מחזירה את סכום המכירות הכולל של לקוח מסוים
+>>הפונקציה שימושית לניתוח פעילות לקוחות
+>>
+>>![image](https://github.com/user-attachments/assets/123c2c9e-fc08-4f4e-9b8e-310a4ce13b2d)
+>>
+>>
+>>![image](https://github.com/user-attachments/assets/1702954c-41e7-4c98-8b67-c9814ec3849f)
+>
+>### Procedure
+>
+>>#### [get_active_discounts_by_store.sql](Stage4/Procedure/get_active_discounts_by_store.sql)
+>>מחזירה את ההנחות הפעילות נכון לעכשיו בחנות מסוימת.
+>>הפרוצדורה נועדה למעקב אחרי מבצעים.
+>>
+>>![image](https://github.com/user-attachments/assets/6b180494-db6d-47b4-a632-be493ab08cd2)
+>>
+>>
+>>![image](https://github.com/user-attachments/assets/8b3f9bca-f212-4815-8e08-b06dc28c924b)
+>>
+>>#### [update_product_stock.sql](Stage4/Procedure/update_product_stock.sql)
+>>הפרוצדורה מעדכנת את כמות המלאי של מוצר מסוים, וזורקת חריגה אם המוצר לא קיים.
+>>לפני עדכון:
+>>
+>>![image](https://github.com/user-attachments/assets/aa99fba1-98ac-4ca4-af6d-82be22bba774)
+>>
+>>אחרי עדכון:
+>>
+>>![image](https://github.com/user-attachments/assets/913c773a-911d-41b1-af82-d0a97700bf37)
+>
+>### Trigger
+>
+>#### [trigger_check_price.sql](Stage4/Trigger/trigger_check_price.sql)
+>הטריגר מונע הכנסת מוצר עם מחיר שהוא 0 או פחות.
+>![image](https://github.com/user-attachments/assets/883ffd63-bf5b-49ba-a19e-d44e334c639a)
+>
+>במקרה של עדכון מחיר חיובי-תקין ההרצה עובדת תקין
+>![image](https://github.com/user-attachments/assets/865d2a34-b9d7-4da4-ac20-ba1fa1aef00f)
+>
+>#### [update_last_updated_column.sql](Stage4/Trigger/update_last_updated_column.sql)
+>הטריגר בכל עדכון למוצר, מעדכן את שדה last_updated עם התאריך הנוכחי.
+>
+>![image](https://github.com/user-attachments/assets/5f6f405d-590d-43bd-a1af-412a8d8ce132)
+>
+>
+
+
+
+
+
+
+
+
+
 
 
 
