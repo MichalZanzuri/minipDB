@@ -1,0 +1,10 @@
+ALTER TABLE product
+ADD COLUMN last_updated TIMESTAMP DEFAULT now();
+
+ALTER TABLE discount
+    DROP COLUMN discountid;
+
+ALTER TABLE discount
+    ADD COLUMN discountid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY;
+
+
