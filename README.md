@@ -426,23 +426,5 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >הוספת העמודה last_updated לטבלת product לצורך כתיבת הטריגר update_last_updated_column
 >הסרת העמודה discountid והוספתה מחדש כ־IDENTITY PRIMARY KEY לצורך כתיבת התוכנית program_apply_discount_top_selling_product
 >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+>###  backup
+>#### [backup4](Stage4/Stage4/backup4)
