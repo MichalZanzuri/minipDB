@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime, date
+import sys
+import os
+sys.path.append(os.path.dirname(__file__))
 from db import connect
 import plotly.express as px
 import plotly.graph_objects as go
