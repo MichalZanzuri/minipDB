@@ -428,3 +428,70 @@ The backup is saved in a file named backup_YYYYMMDD_HHMM.sql. To restore, simply
 >
 >###  backup
 >#### [backup4](Stage4/Stage4/backup4)
+>
+># Stage 5: Creating a User-Friendly GUI for Database Management
+>#### סקירה כללית על המערכת:
+>מערכת ניהול החנות היא אפליקציית ממשק גרפי מקצועית שפותחה בשפת Python באמצעות ספריית Tkinter. המערכת מיועדת לניהול כל היבטי החנות: מוצרים, מכירות, הנחות וסטטיסטיקות מפורטות.
+>#### הוראות הפעלה של האפליקציה:
+>התקנת Python 3.7+
+>שימוש בספריות pip install tkinter
+pip install mysql-connector-python
+# או
+pip install psycopg2
+ניווט במערכת:
+- מסך הבית: מציג מסך פתיחה וניווט למודולים השונים
+- ניהול מוצרים: הוספה, צפייה וניהול מלאי
+- ניהול מכירות: רישום מכירות חדשות וצפייה בהיסטוריה
+- סטטיסטיקות: דשבורד עם נתונים ויזואליים
+- ניהול הנחות: יצירה וניהול הנחות לתקופות שונות
+- שאילתות: הפעלת שאילתות מותאמות אישית
+#### כלים וטכנולוגיות שימושיות:
+#### Python & Tkinter
+Python: שפה ידידותית ועם ספריות עשירות
+Tkinter: ספרייה מובנית לממשק גרפי, קלה לפיתוח  
+#### עיצוב ממשק המשתמש (UI/UX)
+צבעוניות עקבית: מפת צבעים מוגדרת לכל מודול
+אייקונים ויזואליים: שיפור חווית המשתמש
+Responsive Design: ממשק מותאם לגדלי מסך שונים
+#### ניהול מסד נתונים
+Connection Pooling: חיבורים יעילים למסד הנתונים
+Error Handling: טיפול מקיף בשגיאות
+SQL Injection Prevention: שימוש ב-prepared statements
+#### אינטראקטיביות ומשוב למשתמש
+Hover Effects: אפקטי העברת עכבר על כפתורים
+Real-time Updates: עדכון תאריך ושעה בזמן אמת
+Loading States: הצגת סטטוס טעינה
+Error Messages: הודעות שגיאה
+#### ויזואליזציה של נתונים
+גרפי עמודות פשוטים למכירות שבועיות
+כרטיסי סטטיסטיקה אינטראקטיביים
+צבעי סטטוס (ירוק לפעיל, אדום ללא פעיל)
+### 📊 תכונות מרכזיות של המערכת
+#### ניהול מוצרים
+הוספת מוצרים חדשים עם ולידציה
+מעקב אחר מלאי ואזהרות מלאי נמוך
+חישוב שווי מלאי אוטומטי
+
+#### ניהול מכירות
+רישום מכירות בזמן אמת
+מעקב אחר הכנסות יומיות
+ניתוח לקוחות ייחודיים
+
+#### מערכת הנחות מתקדמת
+הנחות מותנות תאריך
+ניהול הנחות לפי מוצר וסניף
+מעקב אחר סטטוס הנחות (פעיל/לא פעיל)
+
+#### דשבורד סטטיסטיקות
+כרטיסי מידע אינטראקטיביים
+גרפי מכירות שבועיים
+חלונות פרטים למידע מורחב
+
+#### מערכת שאילתות גמישה
+שאילתות מוגדרות מראש
+תמיכה בפרמטרים דינמיים
+הצגת תוצאות בטבלה מסודרת
+
+### -המערכת מוכנה לשימוש מסחרי ויכולה לשרת עסקים קטנים ובינוניים ברמת יעילות גבוהה-
+
+
