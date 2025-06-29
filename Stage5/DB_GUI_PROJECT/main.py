@@ -1,8 +1,14 @@
 import tkinter as tk
-from tkinter import messagebox, ttk
+from tkinter import messagebox, ttk, filedialog
 from datetime import datetime
 from db import connect
 import datetime as dt
+import os
+
+# ייבואים עבור Excel
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
 
 # צבעים
 BG_COLOR = "#f8fafc"
@@ -18,12 +24,114 @@ BUTTON_COLORS = {
     "queries": "#6366f1"
 }
 
+class ExcelExporter:
+    """מחלקה לטיפול ביצוא נתונים לאקסל"""
+    
+    def __init__(self):
+        self.workbook = None
+        self.worksheet = None
+    
+    def create_styled_workbook(self, title="דוח מערכת ניהול החנות"):
+        """יצירת קובץ אקסל עם עיצוב מקצועי"""
+        self.workbook = Workbook()
+        self.worksheet = self.workbook.active
+        self.worksheet.title = "דוח נתונים"
+        
+        # הגדרת סגנונות
+        self.header_font = Font(name='Calibri', size=12, bold=True, color='FFFFFF')
+        self.header_fill = PatternFill(start_color='366092', end_color='366092', fill_type='solid')
+        self.title_font = Font(name='Calibri', size=16, bold=True, color='1F4E79')
+        self.data_font = Font(name='Calibri', size=11)
+        self.border = Border(
+            left=Side(style='thin'),
+            right=Side(style='thin'),
+            top=Side(style='thin'),
+            bottom=Side(style='thin')
+        )
+        
+        return self.workbook
+    
+    def add_title_and_metadata(self, title, sheet_name="דוח נתונים"):
+        """הוספת כותרת ומטא-דטה"""
+        if not self.worksheet:
+            return
+            
+        # כותרת ראשית
+        self.worksheet['A1'] = title
+        self.worksheet['A1'].font = self.title_font
+        self.worksheet['A1'].alignment = Alignment(horizontal='center', vertical='center')
+        
+        # תאריך ושעה
+        current_time = datetime.now().strftime("%d/%m/%Y %H:%M")
+        self.worksheet['A2'] = f"נוצר בתאריך: {current_time}"
+        self.worksheet['A2'].font = Font(name='Calibri', size=10, italic=True)
+        
+        # מיזוג תאים לכותרת
+        self.worksheet.merge_cells('A1:F1')
+        
+    def export_data_to_excel(self, data, headers, title, filename=None):
+        """יצוא נתונים לאקסל עם עיצוב מקצועי"""
+        try:
+            self.create_styled_workbook(title)
+            self.add_title_and_metadata(title)
+            
+            # התחלת נתונים משורה 4
+            start_row = 4
+            
+            # הוספת כותרות עמודות
+            for col_num, header in enumerate(headers, 1):
+                cell = self.worksheet.cell(row=start_row, column=col_num)
+                cell.value = header
+                cell.font = self.header_font
+                cell.fill = self.header_fill
+                cell.alignment = Alignment(horizontal='center', vertical='center')
+                cell.border = self.border
+            
+            # הוספת נתונים
+            for row_num, row_data in enumerate(data, start_row + 1):
+                for col_num, value in enumerate(row_data, 1):
+                    cell = self.worksheet.cell(row=row_num, column=col_num)
+                    cell.value = value
+                    cell.font = self.data_font
+                    cell.alignment = Alignment(horizontal='center', vertical='center')
+                    cell.border = self.border
+            
+            # התאמת רוחב עמודות
+            for col_num in range(1, len(headers) + 1):
+                column_letter = get_column_letter(col_num)
+                self.worksheet.column_dimensions[column_letter].width = 15
+            
+            # שמירת הקובץ
+            if not filename:
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename = f"דוח_{title.replace(' ', '_')}_{timestamp}.xlsx"
+            
+            # בחירת מיקום שמירה
+            file_path = filedialog.asksaveasfilename(
+                defaultextension=".xlsx",
+                filetypes=[("Excel files", "*.xlsx"), ("All files", "*.*")],
+                initialfile=filename,
+                title="שמור קובץ אקסל"
+            )
+            
+            if file_path:
+                self.workbook.save(file_path)
+                return file_path
+            
+            return None
+            
+        except Exception as e:
+            raise Exception(f"שגיאה ביצוא לאקסל: {str(e)}")
+
 class MainApplication:
     def __init__(self, root):
         self.root = root
         self.root.title("מערכת ניהול חנות")
         self.root.geometry("1920x1080")
         self.root.configure(bg=BG_COLOR)
+        
+        # הוספת ExcelExporter
+        self.excel_exporter = ExcelExporter()
 
         self.create_main_layout()
 
@@ -142,6 +250,177 @@ class MainApplication:
         """ניקוי התוכן הדינמי"""
         for widget in self.dynamic_content.winfo_children():
             widget.destroy()
+
+    def create_export_buttons_frame(self, parent):
+        """יצירת מסגרת כפתורי יצוא"""
+        export_frame = tk.Frame(parent, bg="#f8fafc", relief="solid", bd=1)
+        export_frame.pack(fill=tk.X, padx=20, pady=10)
+        
+        tk.Label(
+            export_frame, 
+            text="📊 יצוא נתונים לאקסל", 
+            font=("Segoe UI", 14, "bold"), 
+            bg="#f8fafc", 
+            fg="#1e293b"
+        ).pack(pady=10)
+        
+        buttons_container = tk.Frame(export_frame, bg="#f8fafc")
+        buttons_container.pack(pady=10)
+        
+        return export_frame, buttons_container
+    
+    def create_export_button(self, parent, text, command, icon="📤", bg_color="#059669"):
+        """יצירת כפתור יצוא מעוצב"""
+        btn = tk.Button(
+            parent,
+            text=f"{icon} {text}",
+            command=command,
+            font=("Segoe UI", 10, "bold"),
+            bg=bg_color,
+            fg="white",
+            width=20,
+            height=2,
+            relief="flat",
+            cursor="hand2"
+        )
+        btn.pack(side=tk.RIGHT, padx=5)
+        
+        def on_enter(e):
+            btn.config(bg=self.adjust_color(bg_color, -15))
+        def on_leave(e):
+            btn.config(bg=bg_color)
+            
+        btn.bind("<Enter>", on_enter)
+        btn.bind("<Leave>", on_leave)
+        
+        return btn
+
+    # פונקציות יצוא לאקסל
+    def export_products_to_excel(self):
+        """יצוא מוצרים לאקסל"""
+        try:
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT product_id, product_name, price, amount, category, 
+                       minamount, added_date, last_updated 
+                FROM product 
+                ORDER BY product_name
+            """)
+            
+            data = cur.fetchall()
+            headers = ["מספר מוצר", "שם מוצר", "מחיר", "כמות", "קטגוריה", 
+                      "כמות מינימלית", "תאריך הוספה", "עדכון אחרון"]
+            
+            file_path = self.excel_exporter.export_data_to_excel(
+                data, headers, "רשימת מוצרים"
+            )
+            
+            if file_path:
+                messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
+                os.startfile(os.path.dirname(file_path))
+            
+            cur.close()
+            conn.close()
+            
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה ביצוא מוצרים: {str(e)}")
+    
+    def export_sales_to_excel(self):
+        """יצוא מכירות לאקסל"""
+        try:
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT saleid, saledate, totalprice, customerid
+                FROM sale 
+                ORDER BY saledate DESC
+            """)
+            
+            data = cur.fetchall()
+            headers = ["מספר מכירה", "תאריך", "סכום כולל", "קוד לקוח"]
+            
+            file_path = self.excel_exporter.export_data_to_excel(
+                data, headers, "רשימת מכירות"
+            )
+            
+            if file_path:
+                messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
+                os.startfile(os.path.dirname(file_path))
+            
+            cur.close()
+            conn.close()
+            
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה ביצוא מכירות: {str(e)}")
+    
+    def export_low_stock_to_excel(self):
+        """יצוא מוצרים עם מלאי נמוך לאקסל"""
+        try:
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT product_id, product_name, amount, minamount, 
+                       (minamount - amount) as shortage, category
+                FROM product 
+                WHERE amount < minamount
+                ORDER BY (minamount - amount) DESC
+            """)
+            
+            data = cur.fetchall()
+            headers = ["מספר מוצר", "שם מוצר", "כמות נוכחית", "כמות מינימלית", 
+                      "חסר", "קטגוריה"]
+            
+            file_path = self.excel_exporter.export_data_to_excel(
+                data, headers, "מוצרים עם מלאי נמוך"
+            )
+            
+            if file_path:
+                messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
+                os.startfile(os.path.dirname(file_path))
+            
+            cur.close()
+            conn.close()
+            
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה ביצוא מלאי נמוך: {str(e)}")
+    
+    def export_discounts_to_excel(self):
+        """יצוא הנחות לאקסל"""
+        try:
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT d.discountid, p.product_name, s.storelocation, 
+                       d.discountrate, d.startdate, d.enddate,
+                       CASE 
+                           WHEN d.startdate <= CURRENT_DATE AND d.enddate >= CURRENT_DATE 
+                           THEN 'פעילה' 
+                           ELSE 'לא פעילה' 
+                       END as status
+                FROM discount d
+                JOIN product p ON d.productid = p.product_id
+                JOIN store s ON d.storeid = s.storeid
+                ORDER BY d.discountid DESC
+            """)
+            
+            data = cur.fetchall()
+            headers = ["מספר הנחה", "מוצר", "סניף", "שיעור הנחה (%)", 
+                      "תאריך התחלה", "תאריך סיום", "סטטוס"]
+            
+            file_path = self.excel_exporter.export_data_to_excel(
+                data, headers, "רשימת הנחות"
+            )
+            
+            if file_path:
+                messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
+                os.startfile(os.path.dirname(file_path))
+            
+            cur.close()
+            conn.close()
+            
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה ביצוא הנחות: {str(e)}")
 
     def show_welcome_screen(self):
         """מסך ברירת מחדל"""
@@ -298,6 +577,25 @@ class MainApplication:
         except Exception as e:
             tk.Label(stats_frame, text=f"שגיאה: {e}", bg="white", fg="red").pack()
 
+        # כפתורי יצוא לאקסל
+        export_frame, buttons_container = self.create_export_buttons_frame(scrollable_frame)
+        
+        self.create_export_button(
+            buttons_container, 
+            "יצא כל המוצרים", 
+            self.export_products_to_excel,
+            "📦",
+            "#059669"
+        )
+        
+        self.create_export_button(
+            buttons_container, 
+            "יצא מלאי נמוך", 
+            self.export_low_stock_to_excel,
+            "⚠️",
+            "#dc2626"
+        )
+
         # טבלת מוצרים
         table_frame = tk.Frame(scrollable_frame, bg="white")
         table_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
@@ -444,6 +742,17 @@ class MainApplication:
 
         except Exception as e:
             tk.Label(stats_frame, text=f"שגיאה: {e}", bg="white", fg="red").pack()
+
+        # כפתורי יצוא לאקסל
+        export_frame, buttons_container = self.create_export_buttons_frame(scrollable_frame)
+        
+        self.create_export_button(
+            buttons_container, 
+            "יצא כל המכירות", 
+            self.export_sales_to_excel,
+            "🛒",
+            "#059669"
+        )
 
         # טבלת מכירות
         table_frame = tk.Frame(scrollable_frame, bg="white")
@@ -716,6 +1025,17 @@ class MainApplication:
         tk.Button(form_frame, text="➕ הוסף הנחה", command=add_discount, bg="#f59e0b", fg="white",
                   font=("Segoe UI", 12, "bold"), width=20, height=2).pack(pady=20)
 
+        # כפתורי יצוא לאקסל
+        export_frame, buttons_container = self.create_export_buttons_frame(scrollable_frame)
+        
+        self.create_export_button(
+            buttons_container, 
+            "יצא רשימת הנחות", 
+            self.export_discounts_to_excel,
+            "💸",
+            "#059669"
+        )
+
         # טבלת הנחות
         table_frame = tk.Frame(scrollable_frame, bg="white")
         table_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
@@ -889,6 +1209,20 @@ class MainApplication:
         )
         self.execute_btn.pack()
 
+        # כפתור יצוא תוצאות (מוסתר בהתחלה)
+        self.export_results_btn = tk.Button(
+            execute_frame,
+            text="📤 יצא תוצאות לאקסל",
+            command=self.export_query_results,
+            font=("Segoe UI", 12, "bold"),
+            bg="#059669",
+            fg="white",
+            width=25,
+            height=2,
+            relief="flat",
+            cursor="hand2"
+        )
+
         # תוצאות
         results_frame = tk.Frame(scrollable_frame, bg="white")
         results_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
@@ -944,6 +1278,9 @@ class MainApplication:
         # הפעלת כפתור הביצוע
         self.execute_btn.config(state="normal", bg="#10b981")
         self.status_label.config(text="מוכן להפעלה", fg="#10b981")
+        
+        # הסתרת כפתור יצוא תוצאות
+        self.export_results_btn.pack_forget()
 
     def execute_selected_query(self):
         """הפעלת השאילתה הנבחרת"""
@@ -991,6 +1328,11 @@ class MainApplication:
             results = cur.fetchall()
             column_names = [desc[0] for desc in cur.description] if cur.description else []
 
+            # שמירת התוצאות לייצוא
+            self.last_query_results = results
+            self.last_query_headers = column_names
+            self.last_query_title = query_name
+
             # ניקוי תוצאות קודמות
             for item in self.results_tree.get_children():
                 self.results_tree.delete(item)
@@ -1008,15 +1350,38 @@ class MainApplication:
             cur.close()
             conn.close()
 
-            # עדכון סטטוס
-            self.status_label.config(text=f"✅ נמצאו {len(results)} תוצאות", fg="#10b981")
-
-            if len(results) == 0:
+            # עדכון סטטוס והצגת כפתור יצוא
+            if len(results) > 0:
+                self.status_label.config(text=f"✅ נמצאו {len(results)} תוצאות", fg="#10b981")
+                self.export_results_btn.pack(pady=10)
+            else:
                 self.status_label.config(text="ℹ️ לא נמצאו תוצאות", fg="#6b7280")
+                self.export_results_btn.pack_forget()
 
         except Exception as e:
             messagebox.showerror("שגיאה", str(e))
             self.status_label.config(text=f"❌ שגיאה: {str(e)}", fg="#ef4444")
+            self.export_results_btn.pack_forget()
+
+    def export_query_results(self):
+        """יצוא תוצאות השאילתה הנוכחית לאקסל"""
+        if not hasattr(self, 'last_query_results') or not self.last_query_results:
+            messagebox.showwarning("אזהרה", "אין תוצאות לייצוא")
+            return
+
+        try:
+            file_path = self.excel_exporter.export_data_to_excel(
+                self.last_query_results, 
+                self.last_query_headers, 
+                f"תוצאות שאילתה - {self.last_query_title}"
+            )
+            
+            if file_path:
+                messagebox.showinfo("הצלחה", f"התוצאות יוצאו בהצלחה:\n{file_path}")
+                os.startfile(os.path.dirname(file_path))
+                
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה ביצוא התוצאות: {str(e)}")
 
 # יצירת האפליקציה הראשית
 def create_main_app():
@@ -1029,7 +1394,7 @@ def create_main_app():
 
     status_label = tk.Label(
         status_frame,
-        text="● מערכת פעילה",
+        text="● מערכת פעילה | תכונת יצוא לאקסל זמינה",
         font=("Segoe UI", 12),
         fg="#10b981",
         bg=BG_COLOR
