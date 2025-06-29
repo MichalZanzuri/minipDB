@@ -547,4 +547,4 @@ elif page == "⚙️ שאילתות":
 
 # רווח תחתון
 st.markdown("---")
-st.markdown("**🟢 מערכת פעילה** | פותח עם ❤️ על ידי Claude")
+st.markdown("** מערכת פעילה** |  ❤️ Michal Zanzuri & Yael Bouskila-Ditchi")
