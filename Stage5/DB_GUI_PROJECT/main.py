@@ -26,17 +26,17 @@ BUTTON_COLORS = {
 
 class ExcelExporter:
     """מחלקה לטיפול ביצוא נתונים לאקסל"""
-    
+
     def __init__(self):
         self.workbook = None
         self.worksheet = None
-    
+
     def create_styled_workbook(self, title="דוח מערכת ניהול החנות"):
         """יצירת קובץ אקסל עם עיצוב מקצועי"""
         self.workbook = Workbook()
         self.worksheet = self.workbook.active
         self.worksheet.title = "דוח נתונים"
-        
+
         # הגדרת סגנונות
         self.header_font = Font(name='Calibri', size=12, bold=True, color='FFFFFF')
         self.header_fill = PatternFill(start_color='366092', end_color='366092', fill_type='solid')
@@ -48,36 +48,36 @@ class ExcelExporter:
             top=Side(style='thin'),
             bottom=Side(style='thin')
         )
-        
+
         return self.workbook
-    
+
     def add_title_and_metadata(self, title, sheet_name="דוח נתונים"):
         """הוספת כותרת ומטא-דטה"""
         if not self.worksheet:
             return
-            
+
         # כותרת ראשית
         self.worksheet['A1'] = title
         self.worksheet['A1'].font = self.title_font
         self.worksheet['A1'].alignment = Alignment(horizontal='center', vertical='center')
-        
+
         # תאריך ושעה
         current_time = datetime.now().strftime("%d/%m/%Y %H:%M")
         self.worksheet['A2'] = f"נוצר בתאריך: {current_time}"
         self.worksheet['A2'].font = Font(name='Calibri', size=10, italic=True)
-        
+
         # מיזוג תאים לכותרת
         self.worksheet.merge_cells('A1:F1')
-        
+
     def export_data_to_excel(self, data, headers, title, filename=None):
         """יצוא נתונים לאקסל עם עיצוב מקצועי"""
         try:
             self.create_styled_workbook(title)
             self.add_title_and_metadata(title)
-            
+
             # התחלת נתונים משורה 4
             start_row = 4
-            
+
             # הוספת כותרות עמודות
             for col_num, header in enumerate(headers, 1):
                 cell = self.worksheet.cell(row=start_row, column=col_num)
@@ -86,7 +86,7 @@ class ExcelExporter:
                 cell.fill = self.header_fill
                 cell.alignment = Alignment(horizontal='center', vertical='center')
                 cell.border = self.border
-            
+
             # הוספת נתונים
             for row_num, row_data in enumerate(data, start_row + 1):
                 for col_num, value in enumerate(row_data, 1):
@@ -95,17 +95,17 @@ class ExcelExporter:
                     cell.font = self.data_font
                     cell.alignment = Alignment(horizontal='center', vertical='center')
                     cell.border = self.border
-            
+
             # התאמת רוחב עמודות
             for col_num in range(1, len(headers) + 1):
                 column_letter = get_column_letter(col_num)
                 self.worksheet.column_dimensions[column_letter].width = 15
-            
+
             # שמירת הקובץ
             if not filename:
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 filename = f"דוח_{title.replace(' ', '_')}_{timestamp}.xlsx"
-            
+
             # בחירת מיקום שמירה
             file_path = filedialog.asksaveasfilename(
                 defaultextension=".xlsx",
@@ -113,13 +113,13 @@ class ExcelExporter:
                 initialfile=filename,
                 title="שמור קובץ אקסל"
             )
-            
+
             if file_path:
                 self.workbook.save(file_path)
                 return file_path
-            
+
             return None
-            
+
         except Exception as e:
             raise Exception(f"שגיאה ביצוא לאקסל: {str(e)}")
 
@@ -129,7 +129,7 @@ class MainApplication:
         self.root.title("מערכת ניהול חנות")
         self.root.geometry("1920x1080")
         self.root.configure(bg=BG_COLOR)
-        
+
         # הוספת ExcelExporter
         self.excel_exporter = ExcelExporter()
 
@@ -235,6 +235,7 @@ class MainApplication:
         # יצירת הכפתורים
         create_styled_button(self.buttons_frame, "ניהול מוצרים", "📦", self.show_products_screen, BUTTON_COLORS["products"])
         create_styled_button(self.buttons_frame, "ניהול מכירות", "🛒", self.show_sales_screen, BUTTON_COLORS["sales"])
+        create_styled_button(self.buttons_frame, "ניהול לקוחות", "👥", self.show_customers_screen, "#8b5cf6")
         create_styled_button(self.buttons_frame, "סטטיסטיקות", "📊", self.show_stats_screen, BUTTON_COLORS["stats"])
         create_styled_button(self.buttons_frame, "ניהול הנחות", "💸", self.show_discounts_screen, BUTTON_COLORS["discounts"])
         create_styled_button(self.buttons_frame, "שאילתות", "⚙️", self.show_queries_screen, BUTTON_COLORS["queries"])
@@ -255,20 +256,20 @@ class MainApplication:
         """יצירת מסגרת כפתורי יצוא"""
         export_frame = tk.Frame(parent, bg="#f8fafc", relief="solid", bd=1)
         export_frame.pack(fill=tk.X, padx=20, pady=10)
-        
+
         tk.Label(
-            export_frame, 
-            text="📊 יצוא נתונים לאקסל", 
-            font=("Segoe UI", 14, "bold"), 
-            bg="#f8fafc", 
+            export_frame,
+            text="📊 יצוא נתונים לאקסל",
+            font=("Segoe UI", 14, "bold"),
+            bg="#f8fafc",
             fg="#1e293b"
         ).pack(pady=10)
-        
+
         buttons_container = tk.Frame(export_frame, bg="#f8fafc")
         buttons_container.pack(pady=10)
-        
+
         return export_frame, buttons_container
-    
+
     def create_export_button(self, parent, text, command, icon="📤", bg_color="#059669"):
         """יצירת כפתור יצוא מעוצב"""
         btn = tk.Button(
@@ -284,15 +285,15 @@ class MainApplication:
             cursor="hand2"
         )
         btn.pack(side=tk.RIGHT, padx=5)
-        
+
         def on_enter(e):
             btn.config(bg=self.adjust_color(bg_color, -15))
         def on_leave(e):
             btn.config(bg=bg_color)
-            
+
         btn.bind("<Enter>", on_enter)
         btn.bind("<Leave>", on_leave)
-        
+
         return btn
 
     # פונקציות יצוא לאקסל
@@ -307,25 +308,25 @@ class MainApplication:
                 FROM product 
                 ORDER BY product_name
             """)
-            
+
             data = cur.fetchall()
-            headers = ["מספר מוצר", "שם מוצר", "מחיר", "כמות", "קטגוריה", 
-                      "כמות מינימלית", "תאריך הוספה", "עדכון אחרון"]
-            
+            headers = ["מספר מוצר", "שם מוצר", "מחיר", "כמות", "קטגוריה",
+                       "כמות מינימלית", "תאריך הוספה", "עדכון אחרון"]
+
             file_path = self.excel_exporter.export_data_to_excel(
                 data, headers, "רשימת מוצרים"
             )
-            
+
             if file_path:
                 messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
                 os.startfile(os.path.dirname(file_path))
-            
+
             cur.close()
             conn.close()
-            
+
         except Exception as e:
             messagebox.showerror("שגיאה", f"שגיאה ביצוא מוצרים: {str(e)}")
-    
+
     def export_sales_to_excel(self):
         """יצוא מכירות לאקסל"""
         try:
@@ -336,24 +337,24 @@ class MainApplication:
                 FROM sale 
                 ORDER BY saledate DESC
             """)
-            
+
             data = cur.fetchall()
             headers = ["מספר מכירה", "תאריך", "סכום כולל", "קוד לקוח"]
-            
+
             file_path = self.excel_exporter.export_data_to_excel(
                 data, headers, "רשימת מכירות"
             )
-            
+
             if file_path:
                 messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
                 os.startfile(os.path.dirname(file_path))
-            
+
             cur.close()
             conn.close()
-            
+
         except Exception as e:
             messagebox.showerror("שגיאה", f"שגיאה ביצוא מכירות: {str(e)}")
-    
+
     def export_low_stock_to_excel(self):
         """יצוא מוצרים עם מלאי נמוך לאקסל"""
         try:
@@ -366,25 +367,25 @@ class MainApplication:
                 WHERE amount < minamount
                 ORDER BY (minamount - amount) DESC
             """)
-            
+
             data = cur.fetchall()
-            headers = ["מספר מוצר", "שם מוצר", "כמות נוכחית", "כמות מינימלית", 
-                      "חסר", "קטגוריה"]
-            
+            headers = ["מספר מוצר", "שם מוצר", "כמות נוכחית", "כמות מינימלית",
+                       "חסר", "קטגוריה"]
+
             file_path = self.excel_exporter.export_data_to_excel(
                 data, headers, "מוצרים עם מלאי נמוך"
             )
-            
+
             if file_path:
                 messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
                 os.startfile(os.path.dirname(file_path))
-            
+
             cur.close()
             conn.close()
-            
+
         except Exception as e:
             messagebox.showerror("שגיאה", f"שגיאה ביצוא מלאי נמוך: {str(e)}")
-    
+
     def export_discounts_to_excel(self):
         """יצוא הנחות לאקסל"""
         try:
@@ -403,24 +404,682 @@ class MainApplication:
                 JOIN store s ON d.storeid = s.storeid
                 ORDER BY d.discountid DESC
             """)
-            
+
             data = cur.fetchall()
-            headers = ["מספר הנחה", "מוצר", "סניף", "שיעור הנחה (%)", 
-                      "תאריך התחלה", "תאריך סיום", "סטטוס"]
-            
+            headers = ["מספר הנחה", "מוצר", "סניף", "שיעור הנחה (%)",
+                       "תאריך התחלה", "תאריך סיום", "סטטוס"]
+
             file_path = self.excel_exporter.export_data_to_excel(
                 data, headers, "רשימת הנחות"
             )
-            
+
             if file_path:
                 messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
                 os.startfile(os.path.dirname(file_path))
-            
+
             cur.close()
             conn.close()
-            
+
         except Exception as e:
             messagebox.showerror("שגיאה", f"שגיאה ביצוא הנחות: {str(e)}")
+
+    def update_sale(self):
+        """עדכון מכירה קיימת"""
+        try:
+            sale_id = self.sale_id_entry.get().strip()
+            if not sale_id:
+                messagebox.showwarning("אזהרה", "אנא הכנס מספר מכירה לעדכון")
+                return
+
+            # בדיקה שהמכירה קיימת
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM sale WHERE saleid = %s", (int(sale_id),))
+            if not cur.fetchone():
+                messagebox.showerror("שגיאה", "מכירה זו לא קיימת במערכת")
+                cur.close()
+                conn.close()
+                return
+
+            # עדכון המכירה
+            cur.execute("""
+                UPDATE sale 
+                SET totalprice = %s, customerid = %s
+                WHERE saleid = %s
+            """, (
+                float(self.sale_total_entry.get()),
+                int(self.sale_customer_entry.get()),
+                int(sale_id)
+            ))
+
+            conn.commit()
+            cur.close()
+            conn.close()
+
+            messagebox.showinfo("הצלחה", "המכירה עודכנה בהצלחה!")
+
+            # ניקוי השדות
+            self.sale_id_entry.delete(0, tk.END)
+            self.sale_total_entry.delete(0, tk.END)
+            self.sale_customer_entry.delete(0, tk.END)
+
+            self.show_sales_screen()
+
+        except ValueError:
+            messagebox.showerror("שגיאה", "אנא הכנס ערכים תקינים")
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה בעדכון המכירה: {str(e)}")
+
+    def delete_sale(self):
+        """מחיקת מכירה"""
+        try:
+            sale_id = self.sale_id_entry.get().strip()
+            if not sale_id:
+                messagebox.showwarning("אזהרה", "אנא הכנס מספר מכירה למחיקה")
+                return
+
+            # אישור מחיקה
+            result = messagebox.askyesno(
+                "אישור מחיקה",
+                f"האם אתה בטוח שברצונך למחוק את המכירה מספר {sale_id}?\nפעולה זו לא ניתנת לביטול!"
+            )
+
+            if not result:
+                return
+
+            conn = connect()
+            cur = conn.cursor()
+
+            # בדיקה שהמכירה קיימת
+            cur.execute("SELECT * FROM sale WHERE saleid = %s", (int(sale_id),))
+            if not cur.fetchone():
+                messagebox.showerror("שגיאה", "מכירה זו לא קיימת במערכת")
+                cur.close()
+                conn.close()
+                return
+
+            # מחיקת המכירה
+            cur.execute("DELETE FROM sale WHERE saleid = %s", (int(sale_id),))
+            conn.commit()
+            cur.close()
+            conn.close()
+
+            messagebox.showinfo("הצלחה", "המכירה נמחקה בהצלחה!")
+
+            # ניקוי השדות
+            self.sale_id_entry.delete(0, tk.END)
+            self.sale_total_entry.delete(0, tk.END)
+            self.sale_customer_entry.delete(0, tk.END)
+
+            self.show_sales_screen()
+
+        except ValueError:
+            messagebox.showerror("שגיאה", "אנא הכנס מספר מכירה תקין")
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה במחיקת המכירה: {str(e)}")
+
+    def show_customers_screen(self):
+        """הצגת מסך ניהול לקוחות"""
+        self.clear_content()
+
+        # כותרת
+        header = tk.Frame(self.dynamic_content, bg="#8b5cf6", height=50)
+        header.pack(fill=tk.X)
+        header.pack_propagate(False)
+
+        tk.Label(
+            header,
+            text="👥 ניהול לקוחות",
+            font=("Segoe UI", 16, "bold"),
+            bg="#8b5cf6",
+            fg="white"
+        ).pack(expand=True)
+
+        # תוכן עם גלילה
+        canvas = tk.Canvas(self.dynamic_content, bg="white")
+        scrollbar = ttk.Scrollbar(self.dynamic_content, orient="vertical", command=canvas.yview)
+        scrollable_frame = tk.Frame(canvas, bg="white")
+
+        scrollable_frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+
+        # טופס ניהול לקוחות
+        form_frame = tk.Frame(scrollable_frame, bg="#f8fafc", relief="solid", bd=1)
+        form_frame.pack(fill=tk.X, padx=20, pady=10)
+
+        tk.Label(form_frame, text="👤 ניהול לקוחות", font=("Segoe UI", 16, "bold"), bg="#f8fafc", fg="#1e293b").pack(pady=15)
+
+        # שדות הטופס
+        fields_frame = tk.Frame(form_frame, bg="#f8fafc")
+        fields_frame.pack(padx=20, pady=10)
+
+        def create_customer_field(parent, label_text, icon, width=15):
+            row = tk.Frame(parent, bg="#f8fafc")
+            row.pack(fill=tk.X, pady=8)
+            tk.Label(row, text=f"{icon} {label_text}", bg="#f8fafc", font=("Segoe UI", 10, "bold"), width=18, anchor="e").pack(side=tk.RIGHT, padx=5)
+            entry = tk.Entry(row, width=width, font=("Segoe UI", 11), justify="center")
+            entry.pack(side=tk.RIGHT, padx=5)
+            return entry
+
+        self.customer_id_entry = create_customer_field(fields_frame, "מספר לקוח (לעדכון)", "🔢")
+        self.customer_name_entry = create_customer_field(fields_frame, "שם לקוח", "👤")
+        self.customer_phone_entry = create_customer_field(fields_frame, "טלפון", "📞")
+        self.customer_email_entry = create_customer_field(fields_frame, "אימייל", "📧")
+        self.customer_address_entry = create_customer_field(fields_frame, "כתובת", "🏠")
+
+        # כפתורי פעולות לקוחות
+        buttons_frame = tk.Frame(form_frame, bg="#f8fafc")
+        buttons_frame.pack(pady=15)
+
+        def add_customer():
+            try:
+                conn = connect()
+                cur = conn.cursor()
+                cur.execute("""
+                    INSERT INTO customer (customer_name, phone, email, address)
+                    VALUES (%s, %s, %s, %s)
+                """, (
+                    self.customer_name_entry.get(),
+                    self.customer_phone_entry.get(),
+                    self.customer_email_entry.get(),
+                    self.customer_address_entry.get()
+                ))
+                conn.commit()
+                cur.close()
+                conn.close()
+                messagebox.showinfo("הצלחה", "הלקוח נוסף בהצלחה!")
+                self.clear_customer_fields()
+                self.show_customers_screen()
+            except Exception as e:
+                messagebox.showerror("שגיאה", f"שגיאה בהוספת לקוח: {str(e)}")
+
+        def update_customer():
+            try:
+                customer_id = self.customer_id_entry.get().strip()
+                if not customer_id:
+                    messagebox.showwarning("אזהרה", "אנא הכנס מספר לקוח לעדכון")
+                    return
+
+                conn = connect()
+                cur = conn.cursor()
+                cur.execute("SELECT * FROM customer WHERE customerid = %s", (int(customer_id),))
+                if not cur.fetchone():
+                    messagebox.showerror("שגיאה", "לקוח זה לא קיים במערכת")
+                    cur.close()
+                    conn.close()
+                    return
+
+                cur.execute("""
+                    UPDATE customer 
+                    SET customer_name = %s, phone = %s, email = %s, address = %s
+                    WHERE customerid = %s
+                """, (
+                    self.customer_name_entry.get(),
+                    self.customer_phone_entry.get(),
+                    self.customer_email_entry.get(),
+                    self.customer_address_entry.get(),
+                    int(customer_id)
+                ))
+
+                conn.commit()
+                cur.close()
+                conn.close()
+
+                messagebox.showinfo("הצלחה", "הלקוח עודכן בהצלחה!")
+                self.clear_customer_fields()
+                self.show_customers_screen()
+
+            except ValueError:
+                messagebox.showerror("שגיאה", "אנא הכנס מספר לקוח תקין")
+            except Exception as e:
+                messagebox.showerror("שגיאה", f"שגיאה בעדכון הלקוח: {str(e)}")
+
+        def delete_customer():
+            try:
+                customer_id = self.customer_id_entry.get().strip()
+                if not customer_id:
+                    messagebox.showwarning("אזהרה", "אנא הכנס מספר לקוח למחיקה")
+                    return
+
+                result = messagebox.askyesno(
+                    "אישור מחיקה",
+                    f"האם אתה בטוח שברצונך למחוק את הלקוח מספר {customer_id}?\nפעולה זו לא ניתנת לביטול!"
+                )
+
+                if not result:
+                    return
+
+                conn = connect()
+                cur = conn.cursor()
+
+                cur.execute("SELECT * FROM customer WHERE customerid = %s", (int(customer_id),))
+                if not cur.fetchone():
+                    messagebox.showerror("שגיאה", "לקוח זה לא קיים במערכת")
+                    cur.close()
+                    conn.close()
+                    return
+
+                cur.execute("DELETE FROM customer WHERE customerid = %s", (int(customer_id),))
+                conn.commit()
+                cur.close()
+                conn.close()
+
+                messagebox.showinfo("הצלחה", "הלקוח נמחק בהצלחה!")
+                self.clear_customer_fields()
+                self.show_customers_screen()
+
+            except ValueError:
+                messagebox.showerror("שגיאה", "אנא הכנס מספר לקוח תקין")
+            except Exception as e:
+                messagebox.showerror("שגיאה", f"שגיאה במחיקת הלקוח: {str(e)}")
+
+        tk.Button(buttons_frame, text="➕ הוסף לקוח", command=add_customer, bg="#8b5cf6", fg="white", font=("Segoe UI", 10, "bold"), width=15, height=2).pack(side=tk.LEFT, padx=5)
+        tk.Button(buttons_frame, text="✏️ עדכן לקוח", command=update_customer, bg="#3b82f6", fg="white", font=("Segoe UI", 10, "bold"), width=15, height=2).pack(side=tk.LEFT, padx=5)
+        tk.Button(buttons_frame, text="🗑️ מחק לקוח", command=delete_customer, bg="#ef4444", fg="white", font=("Segoe UI", 10, "bold"), width=15, height=2).pack(side=tk.LEFT, padx=5)
+
+        # כפתורי יצוא לאקסל
+        export_frame, buttons_container = self.create_export_buttons_frame(scrollable_frame)
+
+        self.create_export_button(
+            buttons_container,
+            "יצא רשימת לקוחות",
+            self.export_customers_to_excel,
+            "👥",
+            "#8b5cf6"
+        )
+
+        # טבלת לקוחות
+        table_frame = tk.Frame(scrollable_frame, bg="white")
+        table_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+
+        tk.Label(table_frame, text="📋 רשימת לקוחות:", font=("Segoe UI", 14, "bold"), bg="white", fg="#1e293b").pack(anchor="e", pady=(0, 10))
+
+        columns = ("מספר", "שם", "טלפון", "אימייל", "כתובת")
+        tree = ttk.Treeview(table_frame, columns=columns, show="headings", height=10)
+
+        for col in columns:
+            tree.heading(col, text=col)
+            tree.column(col, width=120, anchor="center")
+
+        tree_scrollbar = ttk.Scrollbar(table_frame, orient=tk.VERTICAL, command=tree.yview)
+        tree.configure(yscrollcommand=tree_scrollbar.set)
+
+        tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        tree_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # טעינת לקוחות
+        try:
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("SELECT customerid, customer_name, phone, email, address FROM customer ORDER BY customerid DESC LIMIT 20")
+            for row in cur.fetchall():
+                tree.insert("", tk.END, values=row)
+            cur.close()
+            conn.close()
+        except Exception as e:
+            pass
+
+    def clear_customer_fields(self):
+        """ניקוי שדות הלקוח"""
+        self.customer_id_entry.delete(0, tk.END)
+        self.customer_name_entry.delete(0, tk.END)
+        self.customer_phone_entry.delete(0, tk.END)
+        self.customer_email_entry.delete(0, tk.END)
+        self.customer_address_entry.delete(0, tk.END)
+
+    def export_customers_to_excel(self):
+        """יצוא לקוחות לאקסל"""
+        try:
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT customerid, customer_name, phone, email, address
+                FROM customer 
+                ORDER BY customer_name
+            """)
+
+            data = cur.fetchall()
+            headers = ["מספר לקוח", "שם לקוח", "טלפון", "אימייל", "כתובת"]
+
+            file_path = self.excel_exporter.export_data_to_excel(
+                data, headers, "רשימת לקוחות"
+            )
+
+            if file_path:
+                messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
+                os.startfile(os.path.dirname(file_path))
+
+            cur.close()
+            conn.close()
+
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה ביצוא לקוחות: {str(e)}")
+
+    def update_product(self):
+        """עדכון מוצר קיים"""
+        try:
+            product_id = self.product_id_entry.get().strip()
+            if not product_id:
+                messagebox.showwarning("אזהרה", "אנא הכנס מספר מוצר לעדכון")
+                return
+
+            # בדיקה שהמוצר קיים
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM product WHERE product_id = %s", (int(product_id),))
+            if not cur.fetchone():
+                messagebox.showerror("שגיאה", "מוצר זה לא קיים במערכת")
+                cur.close()
+                conn.close()
+                return
+
+            # עדכון המוצר
+            cur.execute("""
+                UPDATE product 
+                SET product_name = %s, price = %s, amount = %s, category = %s, 
+                    minamount = %s, last_updated = %s
+                WHERE product_id = %s
+            """, (
+                self.product_name_entry.get(),
+                float(self.product_price_entry.get()),
+                int(self.product_amount_entry.get()),
+                self.product_category_entry.get(),
+                int(self.product_min_entry.get()),
+                dt.date.today(),
+                int(product_id)
+            ))
+
+            conn.commit()
+            cur.close()
+            conn.close()
+
+            messagebox.showinfo("הצלחה", "המוצר עודכן בהצלחה!")
+            self.clear_product_fields()
+            self.show_products_screen()
+
+        except ValueError:
+            messagebox.showerror("שגיאה", "אנא הכנס ערכים תקינים")
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה בעדכון המוצר: {str(e)}")
+
+    def delete_product(self):
+        """מחיקת מוצר"""
+        try:
+            product_id = self.product_id_entry.get().strip()
+            if not product_id:
+                messagebox.showwarning("אזהרה", "אנא הכנס מספר מוצר למחיקה")
+                return
+
+            # אישור מחיקה
+            result = messagebox.askyesno(
+                "אישור מחיקה",
+                f"האם אתה בטוח שברצונך למחוק את המוצר מספר {product_id}?\nפעולה זו לא ניתנת לביטול!"
+            )
+
+            if not result:
+                return
+
+            conn = connect()
+            cur = conn.cursor()
+
+            # בדיקה שהמוצר קיים
+            cur.execute("SELECT * FROM product WHERE product_id = %s", (int(product_id),))
+            if not cur.fetchone():
+                messagebox.showerror("שגיאה", "מוצר זה לא קיים במערכת")
+                cur.close()
+                conn.close()
+                return
+
+            # מחיקת המוצר
+            cur.execute("DELETE FROM product WHERE product_id = %s", (int(product_id),))
+            conn.commit()
+            cur.close()
+            conn.close()
+
+            messagebox.showinfo("הצלחה", "המוצר נמחק בהצלחה!")
+            self.clear_product_fields()
+            self.show_products_screen()
+
+        except ValueError:
+            messagebox.showerror("שגיאה", "אנא הכנס מספר מוצר תקין")
+        except Exception as e:
+            messagebox.showerror("שגיאה", f"שגיאה במחיקת המוצר: {str(e)}")
+
+    def clear_product_fields(self):
+        """ניקוי שדות המוצר"""
+        self.product_id_entry.delete(0, tk.END)
+        self.product_name_entry.delete(0, tk.END)
+        self.product_price_entry.delete(0, tk.END)
+        self.product_amount_entry.delete(0, tk.END)
+        self.product_category_entry.delete(0, tk.END)
+        self.product_min_entry.delete(0, tk.END)
+
+    def show_low_stock_window(self):
+        """הצגת חלון מוצרים עם מלאי נמוך"""
+        low_stock_window = tk.Toplevel(self.root)
+        low_stock_window.title("מוצרים עם מלאי נמוך")
+        low_stock_window.geometry("1000x600")
+        low_stock_window.configure(bg="white")
+
+        # כותרת
+        header_frame = tk.Frame(low_stock_window, bg="#ef4444", height=60)
+        header_frame.pack(fill=tk.X)
+        header_frame.pack_propagate(False)
+
+        tk.Label(
+            header_frame,
+            text="⚠️ מוצרים עם מלאי נמוך - דורש טיפול מיידי!",
+            font=("Segoe UI", 16, "bold"),
+            bg="#ef4444",
+            fg="white"
+        ).pack(expand=True)
+
+        # כפתור יצוא
+        export_frame = tk.Frame(low_stock_window, bg="white")
+        export_frame.pack(fill=tk.X, padx=20, pady=10)
+
+        tk.Button(
+            export_frame,
+            text="📤 יצא לאקסל",
+            command=self.export_low_stock_to_excel,
+            bg="#059669",
+            fg="white",
+            font=("Segoe UI", 12, "bold"),
+            width=15,
+            height=2
+        ).pack(side=tk.RIGHT)
+
+        # טבלת נתונים
+        tree_frame = tk.Frame(low_stock_window, bg="white")
+        tree_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+
+        columns = ("מספר מוצר", "שם מוצר", "כמות נוכחית", "כמות מינימלית", "חסר", "קטגוריה")
+        tree = ttk.Treeview(tree_frame, columns=columns, show="headings", height=20)
+
+        for col in columns:
+            tree.heading(col, text=col)
+            tree.column(col, width=150, anchor="center")
+
+        # צבעים לחומרת הבעיה
+        tree.tag_configure("critical", background="#fef2f2", foreground="#dc2626")
+        tree.tag_configure("warning", background="#fff8e1", foreground="#f59e0b")
+
+        scrollbar = ttk.Scrollbar(tree_frame, orient=tk.VERTICAL, command=tree.yview)
+        tree.configure(yscrollcommand=scrollbar.set)
+
+        tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # טעינת נתונים
+        try:
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT product_id, product_name, amount, minamount, 
+                       (minamount - amount) as shortage, category
+                FROM product 
+                WHERE amount < minamount
+                ORDER BY (minamount - amount) DESC
+            """)
+
+            rows = cur.fetchall()
+            for row in rows:
+                shortage = row[4]
+                # קביעת צבע לפי חומרת המחסור
+                tag = "critical" if shortage >= 10 else "warning"
+                tree.insert("", tk.END, values=row, tags=(tag,))
+
+            cur.close()
+            conn.close()
+
+            # הצגת סיכום
+            summary_frame = tk.Frame(low_stock_window, bg="#f8fafc", relief="solid", bd=1)
+            summary_frame.pack(fill=tk.X, padx=20, pady=10)
+
+            tk.Label(
+                summary_frame,
+                text=f"📊 סה\"כ נמצאו {len(rows)} מוצרים עם מלאי נמוך",
+                font=("Segoe UI", 12, "bold"),
+                bg="#f8fafc",
+                fg="#dc2626"
+            ).pack(pady=10)
+
+        except Exception as e:
+            tk.Label(tree_frame, text=f"שגיאה בטעינת נתונים: {e}", bg="white", fg="red").pack()
+
+    def show_unique_customers_window(self):
+        """הצגת חלון לקוחות ייחודיים"""
+        customers_window = tk.Toplevel(self.root)
+        customers_window.title("לקוחות ייחודיים")
+        customers_window.geometry("1000x600")
+        customers_window.configure(bg="white")
+
+        # כותרת
+        header_frame = tk.Frame(customers_window, bg="#8b5cf6", height=60)
+        header_frame.pack(fill=tk.X)
+        header_frame.pack_propagate(False)
+
+        tk.Label(
+            header_frame,
+            text="👥 לקוחות ייחודיים - מי קנה במערכת",
+            font=("Segoe UI", 16, "bold"),
+            bg="#8b5cf6",
+            fg="white"
+        ).pack(expand=True)
+
+        # כפתור יצוא
+        export_frame = tk.Frame(customers_window, bg="white")
+        export_frame.pack(fill=tk.X, padx=20, pady=10)
+
+        def export_unique_customers():
+            try:
+                conn = connect()
+                cur = conn.cursor()
+                cur.execute("""
+                    SELECT DISTINCT c.customerid, c.customer_name, c.phone, c.email, 
+                           COUNT(s.saleid) as total_purchases,
+                           SUM(s.totalprice) as total_spent,
+                           MAX(s.saledate) as last_purchase
+                    FROM customer c
+                    JOIN sale s ON c.customerid = s.customerid
+                    GROUP BY c.customerid, c.customer_name, c.phone, c.email
+                    ORDER BY total_spent DESC
+                """)
+
+                data = cur.fetchall()
+                headers = ["מספר לקוח", "שם לקוח", "טלפון", "אימייל",
+                           "מספר רכישות", "סה\"כ הוצאות", "רכישה אחרונה"]
+
+                file_path = self.excel_exporter.export_data_to_excel(
+                    data, headers, "לקוחות ייחודיים עם פעילות"
+                )
+
+                if file_path:
+                    messagebox.showinfo("הצלחה", f"הקובץ נשמר בהצלחה:\n{file_path}")
+                    os.startfile(os.path.dirname(file_path))
+
+                cur.close()
+                conn.close()
+
+            except Exception as e:
+                messagebox.showerror("שגיאה", f"שגיאה ביצוא: {str(e)}")
+
+        tk.Button(
+            export_frame,
+            text="📤 יצא לאקסל",
+            command=export_unique_customers,
+            bg="#059669",
+            fg="white",
+            font=("Segoe UI", 12, "bold"),
+            width=15,
+            height=2
+        ).pack(side=tk.RIGHT)
+
+        # טבלת נתונים
+        tree_frame = tk.Frame(customers_window, bg="white")
+        tree_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+
+        columns = ("מספר לקוח", "שם לקוח", "טלפון", "מספר רכישות", "סה\"כ הוצאות", "רכישה אחרונה")
+        tree = ttk.Treeview(tree_frame, columns=columns, show="headings", height=20)
+
+        for col in columns:
+            tree.heading(col, text=col)
+            tree.column(col, width=150, anchor="center")
+
+        # צבעים ללקוחות VIP
+        tree.tag_configure("vip", background="#f3e8ff", foreground="#7c3aed")
+        tree.tag_configure("regular", background="#f8fafc", foreground="#374151")
+
+        scrollbar = ttk.Scrollbar(tree_frame, orient=tk.VERTICAL, command=tree.yview)
+        tree.configure(yscrollcommand=scrollbar.set)
+
+        tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # טעינת נתונים
+        try:
+            conn = connect()
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT DISTINCT c.customerid, c.customer_name, c.phone, 
+                       COUNT(s.saleid) as total_purchases,
+                       SUM(s.totalprice) as total_spent,
+                       MAX(s.saledate) as last_purchase
+                FROM customer c
+                JOIN sale s ON c.customerid = s.customerid
+                GROUP BY c.customerid, c.customer_name, c.phone
+                ORDER BY total_spent DESC
+            """)
+
+            rows = cur.fetchall()
+            for row in rows:
+                total_spent = row[4]
+                # קביעת צבע לפי סכום הוצאות
+                tag = "vip" if total_spent >= 1000 else "regular"
+                display_row = (row[0], row[1], row[2], row[3], f"₪{row[4]:,.0f}", row[5])
+                tree.insert("", tk.END, values=display_row, tags=(tag,))
+
+            cur.close()
+            conn.close()
+
+            # הצגת סיכום
+            summary_frame = tk.Frame(customers_window, bg="#f8fafc", relief="solid", bd=1)
+            summary_frame.pack(fill=tk.X, padx=20, pady=10)
+
+            tk.Label(
+                summary_frame,
+                text=f"📊 סה\"כ נמצאו {len(rows)} לקוחות ייחודיים",
+                font=("Segoe UI", 12, "bold"),
+                bg="#f8fafc",
+                fg="#8b5cf6"
+            ).pack(pady=10)
+
+        except Exception as e:
+            tk.Label(tree_frame, text=f"שגיאה בטעינת נתונים: {e}", bg="white", fg="red").pack()
 
     def show_welcome_screen(self):
         """מסך ברירת מחדל"""
@@ -504,6 +1163,8 @@ class MainApplication:
             entry.pack(side=tk.RIGHT, padx=5)
             return entry
 
+        # הוספת שדה מספר מוצר לעדכון
+        self.product_id_entry = create_field(fields_frame, "🔢 מספר מוצר:", 10)
         self.product_name_entry = create_field(fields_frame, "📝 שם מוצר:")
         self.product_price_entry = create_field(fields_frame, "💰 מחיר:", 10)
         self.product_amount_entry = create_field(fields_frame, "📊 כמות:", 10)
@@ -535,7 +1196,13 @@ class MainApplication:
             except Exception as e:
                 messagebox.showerror("שגיאה", str(e))
 
-        tk.Button(form_frame, text="➕ הוסף מוצר", command=add_product, bg="#3b82f6", fg="white", font=("Segoe UI", 11, "bold"), width=20, height=2).pack(pady=15)
+        # כפתורי פעולות מוצרים
+        buttons_frame = tk.Frame(form_frame, bg="#f8fafc")
+        buttons_frame.pack(pady=15)
+
+        tk.Button(buttons_frame, text="➕ הוסף מוצר", command=add_product, bg="#3b82f6", fg="white", font=("Segoe UI", 10, "bold"), width=15, height=2).pack(side=tk.LEFT, padx=5)
+        tk.Button(buttons_frame, text="✏️ עדכן מוצר", command=self.update_product, bg="#10b981", fg="white", font=("Segoe UI", 10, "bold"), width=15, height=2).pack(side=tk.LEFT, padx=5)
+        tk.Button(buttons_frame, text="🗑️ מחק מוצר", command=self.delete_product, bg="#ef4444", fg="white", font=("Segoe UI", 10, "bold"), width=15, height=2).pack(side=tk.LEFT, padx=5)
 
         # סטטיסטיקות (צד ימין)
         stats_frame = tk.Frame(top_frame, bg="white")
@@ -579,18 +1246,18 @@ class MainApplication:
 
         # כפתורי יצוא לאקסל
         export_frame, buttons_container = self.create_export_buttons_frame(scrollable_frame)
-        
+
         self.create_export_button(
-            buttons_container, 
-            "יצא כל המוצרים", 
+            buttons_container,
+            "יצא כל המוצרים",
             self.export_products_to_excel,
             "📦",
             "#059669"
         )
-        
+
         self.create_export_button(
-            buttons_container, 
-            "יצא מלאי נמוך", 
+            buttons_container,
+            "יצא מלאי נמוך",
             self.export_low_stock_to_excel,
             "⚠️",
             "#dc2626"
@@ -677,6 +1344,8 @@ class MainApplication:
             entry.pack(side=tk.RIGHT, padx=5)
             return entry
 
+        # הוספת שדה מספר מכירה לעדכון
+        self.sale_id_entry = create_sale_field(fields_frame, "מספר מכירה (לעדכון)", "🔢")
         self.sale_total_entry = create_sale_field(fields_frame, "סכום כולל (₪)", "💰")
         self.sale_customer_entry = create_sale_field(fields_frame, "קוד לקוח", "👤")
 
@@ -701,7 +1370,13 @@ class MainApplication:
             except Exception as e:
                 messagebox.showerror("שגיאה", str(e))
 
-        tk.Button(form_frame, text="➕ הוסף מכירה", command=add_sale, bg="#10b981", fg="white", font=("Segoe UI", 11, "bold"), width=20, height=2).pack(pady=15)
+        # כפתורי פעולות מכירות
+        buttons_frame = tk.Frame(form_frame, bg="#f8fafc")
+        buttons_frame.pack(pady=15)
+
+        tk.Button(buttons_frame, text="➕ הוסף מכירה", command=add_sale, bg="#10b981", fg="white", font=("Segoe UI", 11, "bold"), width=18, height=2).pack(side=tk.LEFT, padx=5)
+        tk.Button(buttons_frame, text="✏️ עדכן מכירה", command=self.update_sale, bg="#3b82f6", fg="white", font=("Segoe UI", 11, "bold"), width=18, height=2).pack(side=tk.LEFT, padx=5)
+        tk.Button(buttons_frame, text="🗑️ מחק מכירה", command=self.delete_sale, bg="#ef4444", fg="white", font=("Segoe UI", 11, "bold"), width=18, height=2).pack(side=tk.LEFT, padx=5)
 
         # סטטיסטיקות (צד ימין)
         stats_frame = tk.Frame(top_frame, bg="white")
@@ -745,10 +1420,10 @@ class MainApplication:
 
         # כפתורי יצוא לאקסל
         export_frame, buttons_container = self.create_export_buttons_frame(scrollable_frame)
-        
+
         self.create_export_button(
-            buttons_container, 
-            "יצא כל המכירות", 
+            buttons_container,
+            "יצא כל המכירות",
             self.export_sales_to_excel,
             "🛒",
             "#059669"
@@ -862,13 +1537,15 @@ class MainApplication:
                                         ["מספר מכירה", "תאריך", "סכום", "לקוח"])
 
             def show_low_stock_details():
-                self.show_detail_window("מלאי נמוך", "SELECT product_name, amount, minamount FROM product WHERE amount < minamount",
-                                        ["שם מוצר", "כמות נוכחית", "כמות מינימלית"])
+                self.show_low_stock_window()
+
+            def show_unique_customers_details():
+                self.show_unique_customers_window()
 
             create_clickable_stat_card(top_stats_frame, "סה\"כ מכירות", str(total_sales), "🛒", "#dbeafe", show_sales_details)
             create_clickable_stat_card(top_stats_frame, "הכנסות כוללות", f"₪{total_revenue:,.0f}", "💰", "#dcfce7")
             create_clickable_stat_card(top_stats_frame, "מלאי נמוך", str(low_stock), "⚠️", "#fef3c7", show_low_stock_details)
-            create_clickable_stat_card(top_stats_frame, "לקוחות ייחודיים", str(unique_customers), "👥", "#f3e8ff")
+            create_clickable_stat_card(top_stats_frame, "לקוחות ייחודיים", str(unique_customers), "👥", "#f3e8ff", show_unique_customers_details)
 
             # גרף מכירות לפי יום
             chart_frame = tk.Frame(scrollable_frame, bg="#f8fafc", relief="solid", bd=2)
@@ -982,13 +1659,14 @@ class MainApplication:
             entry.pack(pady=5)
             return entry
 
+        self.discount_id_entry = create_discount_field(row1, "מספר הנחה (לעדכון)", "🔢", 10)
         self.discount_rate_entry = create_discount_field(row1, "שיעור הנחה (%)", "📊", 10)
         self.discount_product_entry = create_discount_field(row1, "מספר מוצר", "📦", 10)
-        self.discount_store_entry = create_discount_field(row1, "מספר סניף", "🏪", 10)
 
         row2 = tk.Frame(fields_container, bg="#f8fafc")
         row2.pack(pady=10)
 
+        self.discount_store_entry = create_discount_field(row2, "מספר סניף", "🏪", 10)
         self.discount_start_entry = create_discount_field(row2, "תאריך התחלה", "📅", 15)
         self.discount_end_entry = create_discount_field(row2, "תאריך סיום", "📅", 15)
 
@@ -1022,15 +1700,20 @@ class MainApplication:
             except Exception as e:
                 messagebox.showerror("שגיאה", str(e))
 
-        tk.Button(form_frame, text="➕ הוסף הנחה", command=add_discount, bg="#f59e0b", fg="white",
-                  font=("Segoe UI", 12, "bold"), width=20, height=2).pack(pady=20)
+        # כפתורי פעולות הנחות
+        buttons_frame = tk.Frame(form_frame, bg="#f8fafc")
+        buttons_frame.pack(pady=20)
+
+        tk.Button(buttons_frame, text="➕ הוסף הנחה", command=add_discount, bg="#f59e0b", fg="white", font=("Segoe UI", 11, "bold"), width=18, height=2).pack(side=tk.LEFT, padx=5)
+        tk.Button(buttons_frame, text="✏️ עדכן הנחה", command=self.update_discount, bg="#3b82f6", fg="white", font=("Segoe UI", 11, "bold"), width=18, height=2).pack(side=tk.LEFT, padx=5)
+        tk.Button(buttons_frame, text="🗑️ מחק הנחה", command=self.delete_discount, bg="#ef4444", fg="white", font=("Segoe UI", 11, "bold"), width=18, height=2).pack(side=tk.LEFT, padx=5)
 
         # כפתורי יצוא לאקסל
         export_frame, buttons_container = self.create_export_buttons_frame(scrollable_frame)
-        
+
         self.create_export_button(
-            buttons_container, 
-            "יצא רשימת הנחות", 
+            buttons_container,
+            "יצא רשימת הנחות",
             self.export_discounts_to_excel,
             "💸",
             "#059669"
@@ -1278,7 +1961,7 @@ class MainApplication:
         # הפעלת כפתור הביצוע
         self.execute_btn.config(state="normal", bg="#10b981")
         self.status_label.config(text="מוכן להפעלה", fg="#10b981")
-        
+
         # הסתרת כפתור יצוא תוצאות
         self.export_results_btn.pack_forget()
 
@@ -1371,15 +2054,15 @@ class MainApplication:
 
         try:
             file_path = self.excel_exporter.export_data_to_excel(
-                self.last_query_results, 
-                self.last_query_headers, 
+                self.last_query_results,
+                self.last_query_headers,
                 f"תוצאות שאילתה - {self.last_query_title}"
             )
-            
+
             if file_path:
                 messagebox.showinfo("הצלחה", f"התוצאות יוצאו בהצלחה:\n{file_path}")
                 os.startfile(os.path.dirname(file_path))
-                
+
         except Exception as e:
             messagebox.showerror("שגיאה", f"שגיאה ביצוא התוצאות: {str(e)}")
 
