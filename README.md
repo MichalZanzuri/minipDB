@@ -546,6 +546,11 @@ Error Messages: הודעות שגיאה
 מסך להפעלת השאילתות:
 <img width="1895" height="1021" alt="image" src="https://github.com/user-attachments/assets/a632bb7a-5400-4b19-8834-90c278074c4d" />
 
+תצוגת מסך ראשי של האתר שלנו: (השגיאה היא בגלל שמסד הנתונים לוקאלי והאתר ציבורי)
+<img width="1811" height="846" alt="image" src="https://github.com/user-attachments/assets/cb7bea7b-c4e7-4917-a9bf-7943cc8fffd5" />
+
+
+מוזמנים להכנס: [https://minipdb-q2tfvlnaupkvzjytaztf88.streamlit.app/](https://minipdb-q2tfvlnaupkvzjytaztf88.streamlit.app/)
 
 
 
