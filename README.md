@@ -450,7 +450,7 @@ pip install psycopg2
 Python: שפה ידידותית ועם ספריות עשירות
 Tkinter: ספרייה מובנית לממשק גרפי, קלה לפיתוח  
 #### עיצוב ממשק המשתמש (UI/UX)
-צבעוניות עקבית: מפת צבעים מוגדרת לכל מודול
+צבעים עוקבים: מפת צבעים מוגדרת לכל מודול
 אייקונים ויזואליים: שיפור חווית המשתמש
 Responsive Design: ממשק מותאם לגדלי מסך שונים
 #### ניהול מסד נתונים
@@ -520,6 +520,34 @@ Error Messages: הודעות שגיאה
 דוח מכירות - כל המכירות עם פרטים מלאים
 דוח הנחות - הנחות עם סטטוס פעיל/לא פעיל
 דוחות שאילתות מותאמים - תוצאות שאילתות ספציפיות
+
+מסך ראשי:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/86659fd3-86d5-4583-88d0-6ec27b3c9215" />
+
+מסך ניהול מוצרים:
+<img width="1920" height="1080" alt="צילום מסך 2025-07-16 103033" src="https://github.com/user-attachments/assets/0df3ca19-e5ed-470c-9dd7-38fdcf3e8bed" />
+
+<img width="1920" height="1080" alt="צילום מסך 2025-07-16 103052" src="https://github.com/user-attachments/assets/5b5bd439-7130-40ac-8386-8373f343ca98" />
+
+מסך ניהול מכירות:
+<img width="1920" height="1080" alt="צילום מסך 2025-07-16 103150" src="https://github.com/user-attachments/assets/32e59e0b-7c36-4ad8-b415-e6fff1e5b62b" />
+
+<img width="1920" height="1080" alt="צילום מסך 2025-07-16 103200" src="https://github.com/user-attachments/assets/84e519e0-b921-473a-9950-268ec43529e2" />
+
+מסך ניהול לקוחות:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/afa3d346-1c18-4896-afa0-47942a2bb9a4" />
+
+מסך סטטיסטיקות עם כפתורים לחיצים:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/648cd0af-be22-4928-b63d-cfb9ed434a26" />
+
+מסך ניהול הנחות:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/83aa7c10-9d3c-4825-8d7b-865016e0bea7" />
+
+מסך להפעלת השאילתות:
+<img width="1895" height="1021" alt="image" src="https://github.com/user-attachments/assets/a632bb7a-5400-4b19-8834-90c278074c4d" />
+
+
+
 
 ### -המערכת מוכנה לשימוש מסחרי ויכולה לשרת עסקים קטנים ובינוניים ברמת יעילות גבוהה-
 
