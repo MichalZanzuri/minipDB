@@ -8,7 +8,7 @@ Michal Zanzuri and Yael Bouskila-Ditchi
 - [SQL Scripts](#SQL-Scripts)
 - [Data Insertion](#Data-Insertion)
 - [Backup and Restoration](#Backup-and-Restoration)
-
+  
 
 # Stage 1: Design and Build the Database
 
